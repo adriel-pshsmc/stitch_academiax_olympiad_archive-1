@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AcademiaX: Imperial Open Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#171c1f",
+            "tertiary-container": "#291c00",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e4e9ed",
+            "secondary-fixed": "#ffdadb",
+            "on-secondary-fixed-variant": "#920029",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "tertiary": "#080400",
+            "on-primary-container": "#7786a5",
+            "secondary-fixed-dim": "#ffb2b7",
+            "tertiary-fixed": "#ffdf9c",
+            "primary-container": "#0e1e38",
+            "secondary": "#b80938",
+            "outline": "#75777e",
+            "background": "#f6fafe",
+            "surface-dim": "#d6dade",
+            "tertiary-fixed-dim": "#f0c04f",
+            "surface": "#f6fafe",
+            "surface-container-low": "#f0f4f8",
+            "on-tertiary-fixed": "#251a00",
+            "error-container": "#ffdad6",
+            "secondary-container": "#db2e4e",
+            "on-primary-fixed": "#0b1b35",
+            "surface-container": "#eaeef2",
+            "primary": "#000513",
+            "inverse-surface": "#2c3134",
+            "surface-variant": "#dfe3e7",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#384763",
+            "on-tertiary-fixed-variant": "#5b4300",
+            "on-tertiary-container": "#a8800b",
+            "on-surface-variant": "#44474d",
+            "inverse-on-surface": "#edf1f5",
+            "on-surface": "#171c1f",
+            "primary-fixed-dim": "#b8c7e9",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f6fafe",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#dfe3e7",
+            "surface-tint": "#505f7c",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#40000d",
+            "outline-variant": "#c5c6ce",
+            "primary-fixed": "#d7e2ff",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b8c7e9"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            margin: "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Playfair Display"],
+            "label-code": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "title-lg": ["Inter"],
+            "headline-md": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "label-badge": ["Inter"],
+            "headline-lg-mobile": ["Playfair Display"],
+            display: ["Cinzel", "serif"],
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "title-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+            "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+            "label-code": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }],
+            "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+            "title-lg": ["16px", { lineHeight: "22px", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+            "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "label-badge": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }],
+            "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html {
+        color: #171c1f;
+        background-color: #f6fafe;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="bg-background text-on-background font-sans min-h-screen antialiased flex flex-col">
+<!-- FIXED TOPBAR (YouTube-style fixed header, height 112px / 28rem total: primary 64px + subrail 48px) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-container border-b-2 border-tertiary-fixed-dim shadow-md">
+<!-- Primary Bar (64px) -->
+<div class="h-16 px-gutter flex items-center justify-between gap-space-lg">
+<!-- Brand Cluster & Sidebar Trigger -->
+<div class="flex items-center gap-space-md min-w-[260px]">
+<button aria-label="Toggle Academic Facet Sidebar" class="w-10 h-10 rounded flex items-center justify-center text-tertiary-fixed hover:bg-white/10 transition-colors" id="halSidebarToggle" title="Toggle Academic Taxonomy Facets" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<a class="flex items-center gap-space-sm group text-decoration-none" data-path="index" href="index.html">
+<div class="w-9 h-9 rounded-full bg-primary border border-tertiary-fixed-dim flex items-center justify-center text-tertiary-fixed font-display font-bold text-sm tracking-widest">
+            AX
+          </div>
+<div class="flex flex-col leading-tight">
+<span class="font-display font-bold text-base text-white tracking-widest uppercase">
+              Academia<span class="text-tertiary-fixed-dim">X</span>
+</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.14em] text-on-primary-container font-medium">
+              The Imperial Open Archive
+            </span>
+</div>
+</a>
+</div>
+<!-- Central Omnibox Search Bar (YouTube style) -->
+<div class="flex-1 max-w-2xl">
+<form action="index.html" class="flex items-center w-full bg-primary border border-tertiary-fixed-dim/40 rounded-full overflow-hidden focus-within:border-tertiary-fixed transition-colors shadow-inner" method="GET" role="search">
+<div class="pl-4 text-on-primary-container flex items-center">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+<input aria-label="Search Archive" class="w-full bg-transparent px-space-sm py-2 text-white font-sans text-body-md placeholder:text-on-primary-container/70 placeholder:italic focus:outline-none" name="q" placeholder="Search theorem, registry ID (AXI-2026-...), author, or DOI..." type="search"/>
+<button class="bg-primary-container hover:bg-slate-800 text-tertiary-fixed px-space-lg py-2 border-l border-tertiary-fixed-dim/30 font-title-md text-xs uppercase tracking-wider transition-colors flex items-center gap-1" title="Execute Search" type="submit">
+            Search
+          </button>
+</form>
+</div>
+<!-- Global Shell Actions & Profile Badge -->
+<div class="flex items-center gap-space-md justify-end min-w-[280px]">
+<a class="bg-secondary hover:bg-on-secondary-fixed-variant text-white font-title-md text-xs uppercase tracking-wider px-space-md py-2 rounded border border-white/20 transition-all flex items-center gap-1.5 shadow-sm" data-path="submit" href="submit.html">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Deposit Folio (+50 PTS)</span>
+</a>
+<a class="flex items-center gap-space-sm bg-white/5 hover:bg-white/10 border border-tertiary-fixed-dim/30 px-3 py-1.5 rounded-full transition-colors text-decoration-none" data-path="panelist-detail" href="panelist-detail.html" title="Curator Dossier &amp; Rank">
+<div class="w-7 h-7 rounded-full bg-tertiary-container border border-tertiary-fixed-dim text-tertiary-fixed flex items-center justify-center font-display text-xs font-bold">
+            AL
+          </div>
+<div class="flex flex-col text-left leading-none">
+<span class="text-white font-title-md text-xs">A. Laplace</span>
+<span class="text-tertiary-fixed-dim font-mono text-[10px]">Maestro • 350 PTS</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Sub-bar: Global Route Navigation & Subject Quick Filter Rail (48px) -->
+<nav aria-label="Global Navigation and Taxonomy Rail" class="h-12 bg-primary px-gutter flex items-center gap-space-sm overflow-x-auto border-t border-white/10 text-xs font-sans" data-active-classes="border-tertiary-fixed-dim text-white bg-white/15">
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="index" href="index.html">Main Repository</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="subject-hub" href="subject-hub.html">Subject Landing</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="reviewer" href="reviewer.html">Document Reader</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelists" href="panelists.html">Panelist Directory</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelist-detail" href="panelist-detail.html">Panelist Profile</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="submit" href="submit.html">Upload Portal</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="about" href="about.html">Archive Rubric</a>
+</nav>
+</header>
+<!-- APP SHELL WRAPPER (Top padding matches header 112px / 28rem total: pt-28) -->
+<div class="flex-1 flex w-full pt-28">
+<!-- PERSISTENT LEFT SIDEBAR: HAL-INRIA Academic Facet Taxonomy -->
+<aside aria-label="HAL-INRIA Academic Taxonomy Facet Tree" class="w-72 shrink-0 bg-surface-container-low border-r border-outline-variant/40 sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto p-4 flex flex-col gap-5 transition-all duration-200 z-30" id="halSidebar">
+<div class="flex items-center justify-between pb-3 border-b-2 border-primary-container">
+<span class="font-display font-bold text-xs uppercase tracking-wider text-primary-container">Taxonomy Facets</span>
+<a class="text-[11px] font-title-md uppercase text-secondary hover:underline" href="index.html">Reset Filters</a>
+</div>
+<!-- Facet: Discipline / Macro Fields -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Discipline</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Mathematics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">312</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>Physics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">245</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span>Informatics &amp; AI</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">189</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Chemistry &amp; Bio</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">164</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Social Sciences</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">86</span>
+</a>
+</div>
+</div>
+<!-- Facet: Document Type & Weighting -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Document Format</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Self-Written Reviewer</span>
+<span class="font-mono text-[10px] text-secondary font-semibold">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Practice Exam Keys</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+40 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Monographic Folios</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Past Olympiad Proofs</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+30 PTS</span>
+</a>
+</div>
+</div>
+<!-- Facet: Archive Session Year -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Congress Session</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs bg-surface-container font-title-md text-primary-container">
+<span>Session 2026 (Active)</span>
+<span class="font-mono text-[11px]">540</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2025</span>
+<span class="font-mono text-[11px]">480</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2024</span>
+<span class="font-mono text-[11px]">310</span>
+</div>
+</div>
+</div>
+<!-- HAL-INRIA Node Metadata Stamp -->
+<div class="mt-auto p-3 bg-surface-container rounded border border-outline-variant/50 text-[11px] text-on-surface-variant leading-relaxed">
+<div class="font-title-md text-primary-container uppercase tracking-wider mb-1">HAL Open Science Registry</div>
+<div class="font-mono text-[10px]">Node: HAL-INRIA PSHS-MC</div>
+<div class="font-mono text-[10px] text-outline">ARK: ark:/12148/axi.2026</div>
+</div>
+</aside>
+<!-- MAIN CONTENT VIEWPORT -->
+<main class="flex-1 min-w-0 bg-background">
+<div class="flex flex-col w-full">
+<!-- SCRIPT CONTEXT FOR INTERACTIVE FILTERS & COUNTERS -->
+<script>
+    function filterEvaluations(filterType) {
+      const rows = document.querySelectorAll('.eval-row');
+      const buttons = document.querySelectorAll('.filter-pill');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-primary-container', 'text-tertiary-fixed');
+        btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      });
+      const activeBtn = document.getElementById('filter-' + filterType);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        activeBtn.classList.add('bg-primary-container', 'text-tertiary-fixed');
+      }
+      rows.forEach(row => {
+        if (filterType === 'all') {
+          row.style.display = '';
+        } else {
+          const verdict = row.getAttribute('data-verdict');
+          row.style.display = (verdict === filterType) ? '' : 'none';
+        }
+      });
+    }
+  </script>
+<!-- TOP SOVEREIGN DOSSIER BANNER -->
+<section class="relative w-full bg-gradient-to-r from-primary-container via-primary to-primary-container text-on-primary p-margin overflow-hidden shadow-md">
+<!-- Ambient Classical Ornament Glow -->
+<div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-secondary-container opacity-10 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 -bottom-24 w-80 h-80 rounded-full bg-tertiary-fixed-dim opacity-10 blur-2xl pointer-events-none"></div>
+<div class="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-xl">
+<!-- Portrait & Dignitary Meta -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-lg min-w-0">
+<div class="relative">
+<img class="w-28 h-28 lg:w-36 lg:h-36 rounded-full object-cover shadow-xl" data-alt="Distinguished French academic scholar portrait, Dr. Augustin-Louis Laplace in neoclassical formal attire with academic medal insignia, oil painting style with atmospheric chiaroscuro lighting, deep navy background, gold highlights, and scholarly gravitas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV36ynZ5H90AvHoX6OEGd3FWrFP9sXLhsppXiyvW3ds2HC9PRIIiHEkSMIy7jL0lbtEXlnvSCDHvA9yjc58AXQivunnDoz10OR5NxUR0DD9Izq5ZCnIhHO0oEU32JxoE59MEznV9C75Aef4zCtmHHdt6ws2rs4al8LlkC8PlPWnqiXPErqgNi1_vjRX3lqoCl0ZG9rwt0EAUgWGRSXGsCl3bJCDlU_vULUMLNhxmi-HV10SXf-tHFR"/>
+<div class="absolute -bottom-2 -right-1 bg-tertiary-container text-tertiary-fixed px-2.5 py-0.5 rounded-full font-label-code text-label-code shadow-sm">
+            MAESTRO
+          </div>
+</div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-label-code text-label-code uppercase tracking-wider text-tertiary-fixed-dim bg-white/10 px-2 py-0.5 rounded">
+              CURATOR ID: PSHS-CUR-0018
+            </span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-secondary-fixed bg-secondary-container/40 px-2 py-0.5 rounded">
+              High Senate Quorum
+            </span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white tracking-tight leading-tight">
+            Dr. Augustin-Louis Laplace
+          </h1>
+<p class="font-title-lg text-title-lg text-primary-fixed-dim">
+            Maestro of the Sovereign Order &amp; PSHS-MC Mathematics Cluster Lead
+          </p>
+<div class="flex items-center gap-space-sm flex-wrap mt-space-xs">
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge bg-tertiary-container text-tertiary-fixed px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">military_tech</span>
+              Certified Senate Chair
+            </span>
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge bg-white/10 text-white px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">workspace_premium</span>
+              MTP Olympiad Lead Juror
+            </span>
+<span class="inline-flex items-center gap-1 font-label-badge text-label-badge bg-secondary text-on-secondary px-2.5 py-1 rounded shadow-sm">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+              Vanguard Scholar
+            </span>
+</div>
+</div>
+</div>
+<!-- Quick Action Pedestal -->
+<div class="flex flex-col sm:flex-row lg:flex-col gap-space-sm w-full lg:w-auto shrink-0">
+<a class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-title-md text-title-md px-space-lg py-2.5 rounded transition-all shadow-md" href="mailto:curator.laplace@academiax.inria.fr">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Petition Folio Review</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-title-md text-title-md px-space-lg py-2.5 rounded transition-all" href="#evaluated-folios">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<span>View 42 Certified Verdicts</span>
+</a>
+</div>
+</div>
+<!-- STATS OVERVIEW BAR -->
+<div class="max-w-7xl mx-auto mt-space-xl pt-space-lg bg-white/5 rounded-lg p-space-md shadow-inner grid grid-cols-2 md:grid-cols-4 gap-space-md">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-code text-label-code text-on-primary-container uppercase">Accumulated Scholar Honor</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-tertiary-fixed font-bold">350</span>
+<span class="font-mono text-xs text-tertiary-fixed-dim uppercase">PTS (Maestro Tier)</span>
+</div>
+<span class="font-body-sm text-body-sm text-slate-300">Top 0.5% peer ranking</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-code text-label-code text-on-primary-container uppercase">Evaluated Archival Folios</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-white font-bold">42</span>
+<span class="font-mono text-xs text-slate-300">Monographs</span>
+</div>
+<span class="font-body-sm text-body-sm text-slate-300">Since Session 2024</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-code text-label-code text-on-primary-container uppercase">Senate Consensus Agreement</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-white font-bold">99.8%</span>
+<span class="font-mono text-xs text-secondary-fixed">Ultra-Rigor</span>
+</div>
+<span class="font-body-sm text-body-sm text-slate-300">Zero reversed verdicts</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-code text-label-code text-on-primary-container uppercase">Turnaround SLA Commitment</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-white font-bold">14</span>
+<span class="font-mono text-xs text-slate-300">Solar Days</span>
+</div>
+<span class="font-body-sm text-body-sm text-slate-300">Median time: 9.4 days</span>
+</div>
+</div>
+</section>
+<!-- CONTENT MOSAIC: BIOGRAPHY & RIGOR METRICS -->
+<section class="max-w-7xl mx-auto w-full px-gutter py-space-xl grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Biography & Philosophy Dossier (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-xl rounded-xl shadow-md flex flex-col justify-between">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-md py-space-xs rounded">
+<span class="font-headline-sm text-headline-sm text-primary-container">Curator Dossier &amp; Archival Credo</span>
+<span class="font-label-code text-label-code text-outline uppercase">ARK: ark:/12148/laplace-bio-26</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+          Dr. Augustin-Louis Laplace holds the Imperial Chair of Analytical Formalism at the Philippine Science High School Main Campus, operating under the cooperative bilateral protocols of INRIA Rocquencourt and the French Academy of Sciences. An alumnus of the <em>École Normale Supérieure</em>, his treatise work focuses on higher symplectic geometry, algebraic topology, and deterministic celestial mechanics.
+        </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          As Chair of the Mathematics Review Senate, Dr. Laplace enforces an uncompromising evaluation philosophy derived from early 19th-century French neoclassicism: mathematical manuscripts are judged not merely for deductive correctness, but for architectural harmony, typographic beauty in LaTeX compilation, and pedagogical clarity. His reviews routinely mandate high-precision historical citations and algorithmic reproducibilities.
+        </p>
+<div class="p-space-md bg-surface-container-low rounded-lg mt-space-sm flex items-start gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[28px] shrink-0 mt-0.5">format_quote</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm italic text-primary-container">
+              "A proof devoid of compositional purity is merely computation, not geometry."
+            </span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-outline mt-1">
+              — Laplace Address to the Imperial Archive, Session 2025
+            </span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm pt-space-lg mt-space-lg bg-surface-container-low/60 p-space-md rounded-lg">
+<div>
+<span class="font-label-code text-label-code text-outline uppercase block">Laboratory</span>
+<span class="font-title-md text-title-md text-primary-container">UMR 7586 Sorbonne</span>
+</div>
+<div>
+<span class="font-label-code text-label-code text-outline uppercase block">Primary Domain</span>
+<span class="font-title-md text-title-md text-primary-container">math.DG, math.AP</span>
+</div>
+<div>
+<span class="font-label-code text-label-code text-outline uppercase block">Quorum Office</span>
+<span class="font-title-md text-title-md text-primary-container">Curia III, Salle Euler</span>
+</div>
+</div>
+</div>
+<!-- Rigor & Scoring Metrics Bento (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Card 1: Rigor vs Leniency Index -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary-container">Rigor vs. Leniency Index</span>
+<span class="font-label-badge text-label-badge bg-secondary-fixed text-on-secondary-fixed font-bold px-2 py-0.5 rounded">
+            HYPER-RIGOROUS (94/100)
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Statistical deviation against global archive curator benchmark. Laplace scores 1.8 σ above mean peer strictness.
+        </p>
+<!-- Progress Bar Meter -->
+<div class="w-full bg-surface-container-high rounded-full h-3 mt-2 overflow-hidden flex">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" style="width: 94%;"></div>
+</div>
+<div class="flex justify-between font-label-code text-label-code text-outline mt-1">
+<span>0 (Permissive)</span>
+<span>50 (Consensus)</span>
+<span class="text-secondary font-bold">94 (Laplace Standard)</span>
+</div>
+</div>
+<!-- Card 2: Senate Quorum & SLA Distribution -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary-container">Pedagogical Score Vector</span>
+<span class="font-label-badge text-label-badge bg-tertiary-fixed text-on-tertiary-fixed font-bold px-2 py-0.5 rounded">
+            MEAN: 4.86 / 5.0
+          </span>
+</div>
+<!-- Metric Distribution Bar Set -->
+<div class="flex flex-col gap-2 mt-1">
+<div>
+<div class="flex justify-between font-title-md text-title-md text-on-surface mb-1">
+<span>Mathematical Accuracy &amp; Proof Completeness</span>
+<span class="font-mono text-primary font-bold">4.98</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary-container h-full rounded-full" style="width: 99.6%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-title-md text-title-md text-on-surface mb-1">
+<span>Pedagogical Clarity for Olympiad Trainees</span>
+<span class="font-mono text-primary font-bold">4.72</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary-container h-full rounded-full" style="width: 94.4%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-title-md text-title-md text-on-surface mb-1">
+<span>Imperial TeX Typesetting &amp; Axiom Schema</span>
+<span class="font-mono text-secondary font-bold">4.90</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-secondary-container h-full rounded-full" style="width: 98%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 mt-2 bg-surface-container-low px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed-dim">verified</span>
+            Senate Quorum Attendance
+          </span>
+<span class="font-label-code text-label-code font-bold text-primary-container">100.0% (48/48 Conclaves)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- TABLE OF ALL EVALUATED MATERIALS -->
+<section class="max-w-7xl mx-auto w-full px-gutter pb-space-xl" id="evaluated-folios">
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden">
+<!-- Table Header Bar & Filter Controls -->
+<div class="p-space-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[24px]">fact_check</span>
+<h2 class="font-headline-md text-headline-md text-primary-container">
+              Archive Folios Evaluated by Dr. Laplace
+            </h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Complete jurisdictional record of academic adjudications, rubric breakdowns, and ratified sovereign verdicts.
+          </p>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg">
+<button class="filter-pill px-3 py-1.5 rounded-md font-title-md text-xs bg-primary-container text-tertiary-fixed transition-colors" id="filter-all" onclick="filterEvaluations('all')">
+            All Records (6)
+          </button>
+<button class="filter-pill px-3 py-1.5 rounded-md font-title-md text-xs bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" id="filter-pass" onclick="filterEvaluations('pass')">
+            Imperial Pass (4)
+          </button>
+<button class="filter-pill px-3 py-1.5 rounded-md font-title-md text-xs bg-surface-container-high text-on-surface-variant hover:text-primary transition-colors" id="filter-revision" onclick="filterEvaluations('revision')">
+            Revision Needed (2)
+          </button>
+</div>
+</div>
+<!-- Responsive Bibliographic Matrix -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-sans text-body-md border-collapse">
+<thead>
+<tr class="bg-primary text-white font-headline-sm text-xs tracking-wider uppercase">
+<th class="py-3.5 px-4 font-mono font-normal" scope="col">Accession ID</th>
+<th class="py-3.5 px-4 font-serif" scope="col">Treatise Title &amp; Authors</th>
+<th class="py-3.5 px-4 font-serif" scope="col">Discipline</th>
+<th class="py-3.5 px-4 font-serif" scope="col">Date Adjudicated</th>
+<th class="py-3.5 px-4 font-serif text-center" scope="col">Accuracy / Pedagogy / TeX</th>
+<th class="py-3.5 px-4 font-serif text-center" scope="col">Sovereign Verdict</th>
+<th class="py-3.5 px-4 font-mono font-normal text-right" scope="col">ARK Permalink</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1: High Pass -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors" data-verdict="pass">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2026-9812]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  Cohomological Invariants of Symplectic Orbifolds in Higher Dimensions
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Prof. Émile Picard • Lab Math Sorbonne
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  math.DG (Differential)
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                14 Jan 2026
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-primary font-bold">5.0</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">4.9</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-bold">5.0</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                  Imperial Pass
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.9812</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<!-- Row 2: Revision Required -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors bg-amber-50/30" data-verdict="revision">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2026-9740]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  On the Hyperbolic Limit of Degenerate Navier-Stokes Operators
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Dr. Jean-Claude Leray • PSHS Research Cell IV
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  math.AP (Analysis)
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                02 Jan 2026
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-amber-800 font-bold">3.8</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">4.2</span>
+<span class="text-outline">/</span>
+<span class="text-amber-800 font-bold">3.5</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-amber-100 text-amber-900 px-2.5 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span>
+                  Revision Needed
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.9740</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<!-- Row 3: High Pass (Laurel Award) -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors" data-verdict="pass">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2025-8831]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  Universal Bounds for Prime Gaps via Sieve Arithmetic in Polynomial Rings
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Marc-Antoine Legendre • INRIA Sophia Antipolis
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  math.NT (Number Theory)
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                19 Nov 2025
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-primary font-bold">5.0</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">5.0</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-bold">4.9</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-1 rounded font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">military_tech</span>
+                  Imperial Pass • Laureate
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.8831</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<!-- Row 4: High Pass -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors" data-verdict="pass">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2025-8620]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  Galois Representations and Iwasawa Invariants in PSHS Math Curricula
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Dr. Augustin-Louis Laplace &amp; Consortium Jurors
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  math.AG (Algebraic)
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                28 Oct 2025
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-primary font-bold">4.9</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">4.8</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-bold">4.8</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                  Imperial Pass
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.8620</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<!-- Row 5: Revision Required -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors bg-amber-50/30" data-verdict="revision">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2025-8104]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  A Simplified Heuristic for Quantum Annealing Phase Shifts in Graph Coloring
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Dr. Viviane Moreau • Quantum Labs Paris
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  quant-ph / cs.CC
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                12 Sep 2025
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-amber-800 font-bold">3.2</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">4.4</span>
+<span class="text-outline">/</span>
+<span class="text-amber-800 font-bold">3.0</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-amber-100 text-amber-900 px-2.5 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span>
+                  Revision Needed
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.8104</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+<!-- Row 6: Imperial Pass -->
+<tr class="eval-row hover:bg-surface-container-low transition-colors" data-verdict="pass">
+<td class="py-4 px-4 font-mono text-label-code text-primary-container font-semibold whitespace-nowrap">
+                [AXI-2025-7944]
+              </td>
+<td class="py-4 px-4 min-w-[280px]">
+<a class="font-headline-sm text-sm text-primary hover:text-secondary font-bold block" href="reviewer.html">
+                  Rigid Analytic Geometry of Fargues-Fontaine Curves in Scholze Monoids
+                </a>
+<span class="font-body-sm text-xs text-on-surface-variant">
+                  Laurent Schwartz Scholar Collective • INRIA MC
+                </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="font-label-badge text-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">
+                  math.NT / p-adic
+                </span>
+</td>
+<td class="py-4 px-4 font-mono text-xs text-on-surface-variant whitespace-nowrap">
+                04 Aug 2025
+              </td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5 font-label-code text-xs">
+<span class="text-primary font-bold">4.9</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-bold">4.7</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-bold">5.0</span>
+</div>
+</td>
+<td class="py-4 px-4 text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-label-badge text-xs bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                  Imperial Pass
+                </span>
+</td>
+<td class="py-4 px-4 text-right whitespace-nowrap font-mono text-xs">
+<a class="text-secondary hover:underline inline-flex items-center gap-1 justify-end" href="reviewer.html">
+<span>ark:/axi.7944</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Pagination / Status Bar -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between text-on-surface-variant text-body-sm">
+<span class="font-label-code text-xs">
+          Showing 6 of 42 Historical Folio Records • Hal-Inria Certified Ledger
+        </span>
+<div class="flex items-center gap-2 mt-2 sm:mt-0">
+<button class="px-3 py-1 rounded bg-surface-container-high text-xs font-title-md text-on-surface disabled:opacity-50" disabled="">
+            Previous
+          </button>
+<span class="font-mono text-xs px-2">Page 1 of 7</span>
+<button class="px-3 py-1 rounded bg-surface-container-high text-xs font-title-md text-on-surface hover:bg-surface-container-highest transition-colors">
+            Next
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- JURIDICAL OATH FOOTNOTE -->
+<section class="max-w-7xl mx-auto w-full px-gutter pb-space-xl">
+<div class="bg-primary text-white p-space-lg rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-tertiary-container border border-tertiary-fixed-dim text-tertiary-fixed flex items-center justify-center font-display text-xl font-bold shrink-0">
+          AL
+        </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-tertiary-fixed">
+            Senate Juror Attestation of Impartiality
+          </h3>
+<p class="font-body-sm text-body-sm text-slate-300">
+            All rubric markings comply with the 1804 Imperial Cartulary of Scientific Integrity. No conflicting commercial interest declared.
+          </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<a class="px-4 py-2 rounded bg-white/10 hover:bg-white/20 text-white font-title-md text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-1.5" href="panelists.html">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Back to Panelist Directory</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- VANILLA INTERACTIVITY: Mobile/Desktop Sidebar Toggle & Active Route Detection -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('halSidebarToggle');
+      const sidebar = document.getElementById('halSidebar');
+      
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+
+      // Dynamic active state highlight based on current pathname
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const cleanCurrent = currentPath.replace('.html', '');
+      const navLinks = document.querySelectorAll('header nav a[data-path]');
+      const activeClasses = (document.querySelector('header nav')?.getAttribute('data-active-classes') || 'text-white border-tertiary-fixed-dim bg-white/15').split(' ');
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('data-path');
+        if (linkPath === cleanCurrent || (cleanCurrent === '' && linkPath === 'index')) {
+          link.classList.add(...activeClasses);
+        }
+      });
+    });
+  </script>
+</body></html>

@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AcademiaX: Imperial Open Archive - Clean Semantic Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-950: #070d1d;
+      --navy-900: #0b152d;
+      --navy-850: #101c3d;
+      --navy-800: #182852;
+      --navy-700: #243b77;
+      --gold-500: #d4af37;
+      --gold-400: #e6c86e;
+      --gold-600: #b59227;
+      --crimson-600: #be123c;
+      --crimson-700: #9f1239;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-800: #1e293b;
+      --border-subtle: rgba(212, 175, 55, 0.2);
+      --border-card: #e2e8f0;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-display: 'Cinzel', serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --topbar-height: 114px;
+      --sidebar-width: 290px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: #f4f6fa;
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================================================
+       TOP BAR (YouTube Style, Fixed Header)
+       ========================================================================== */
+    header.yt-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--topbar-height);
+      background: var(--navy-900);
+      border-bottom: 2px solid var(--gold-500);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .topbar-primary {
+      height: 64px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 260px;
+    }
+
+    .sidebar-trigger-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--gold-400);
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-trigger-btn:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-500);
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-insignia {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-400);
+      object-fit: cover;
+      background: var(--navy-950);
+    }
+
+    .brand-titles h1 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .brand-titles h1 span {
+      color: var(--gold-400);
+    }
+
+    .brand-titles p {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate-400);
+      font-weight: 500;
+    }
+
+    /* Central YouTube-style Search */
+    .yt-search-container {
+      flex: 1;
+      max-width: 680px;
+      display: flex;
+      align-items: center;
+    }
+
+    .yt-search-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: var(--navy-950);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.2s;
+    }
+
+    .yt-search-box:focus-within {
+      border-color: var(--gold-400);
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+    }
+
+    .yt-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      color: #ffffff;
+      font-size: 0.92rem;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+
+    .yt-search-input::placeholder {
+      color: var(--slate-400);
+      font-style: italic;
+    }
+
+    .yt-search-btn {
+      background: var(--navy-850);
+      border: none;
+      border-left: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--gold-400);
+      padding: 0 20px;
+      height: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .yt-search-btn:hover {
+      background: var(--navy-800);
+      color: #ffffff;
+    }
+
+    /* User Profile & Right Actions */
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 250px;
+      justify-content: flex-end;
+    }
+
+    .deposit-cta-btn {
+      background: linear-gradient(135deg, var(--crimson-600), var(--crimson-700));
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(190, 18, 60, 0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .deposit-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(190, 18, 60, 0.6);
+    }
+
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 4px 12px 4px 4px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .user-avatar-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-400);
+      object-fit: cover;
+    }
+
+    .user-info-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .user-name-title {
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .user-tier-rank {
+      color: var(--gold-400);
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    /* Sub-bar: Subject Filter Chips (YouTube Style) */
+    .topbar-chips-rail {
+      height: 48px;
+      background: var(--navy-950);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .filter-chip {
+      background: var(--navy-850);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: #e2e8f0;
+      padding: 5px 14px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      background: var(--navy-800);
+      border-color: var(--gold-400);
+      color: #ffffff;
+    }
+
+    .filter-chip.active {
+      background: var(--gold-500);
+      color: var(--navy-950);
+      font-weight: 700;
+      border-color: var(--gold-400);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.35);
+    }
+
+    .chip-count {
+      font-size: 0.72rem;
+      opacity: 0.75;
+      margin-left: 4px;
+    }
+
+    /* ==========================================================================
+       APP BODY CONTAINER (Sidebar + Main Content Viewport)
+       ========================================================================== */
+    .app-layout-shell {
+      margin-top: var(--topbar-height);
+      display: flex;
+      flex: 1;
+      width: 100%;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       LEFT SIDEBAR (HAL INRIA Style Academic Facet Tree)
+       ========================================================================== */
+    aside.hal-sidebar {
+      width: var(--sidebar-width);
+      background: #ffffff;
+      border-right: 1px solid var(--border-card);
+      height: calc(100vh - var(--topbar-height));
+      position: sticky;
+      top: var(--topbar-height);
+      overflow-y: auto;
+      padding: 20px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: width 0.25s ease, transform 0.25s ease;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+    }
+
+    aside.hal-sidebar.collapsed {
+      width: 0;
+      padding: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+
+    .hal-sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--navy-900);
+    }
+
+    .hal-sidebar-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--navy-900);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hal-reset-link {
+      font-size: 0.72rem;
+      color: var(--crimson-600);
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .hal-reset-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Facet Sections */
+    .facet-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .facet-title {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--slate-600);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 0;
+    }
+
+    .facet-indicator {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+    }
+
+    .facet-tree-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-left: 2px;
+    }
+
+    .facet-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      color: var(--slate-700);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .facet-item:hover {
+      background: var(--slate-100);
+      color: var(--navy-900);
+    }
+
+    .facet-item.selected {
+      background: #eef2ff;
+      color: var(--navy-900);
+      font-weight: 600;
+      border-left: 3px solid var(--navy-700);
+    }
+
+    .facet-label-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .facet-checkbox {
+      accent-color: var(--navy-850);
+      cursor: pointer;
+    }
+
+    .facet-tag-counter {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      background: var(--slate-100);
+      color: var(--slate-500);
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    .facet-item.selected .facet-tag-counter {
+      background: #dfe7fc;
+      color: var(--navy-800);
+      font-weight: 600;
+    }
+
+    /* HAL Institutional Stamp */
+    .hal-meta-box {
+      margin-top: auto;
+      padding: 12px;
+      background: #fafafc;
+      border: 1px dashed var(--slate-300);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: var(--slate-500);
+      line-height: 1.4;
+    }
+
+    .hal-meta-box strong {
+      color: var(--navy-900);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT VIEWPORT (Folio Grid Display)
+       ========================================================================== */
+    main.hal-viewport {
+      flex: 1;
+      padding: 24px 28px 48px;
+      min-width: 0;
+    }
+
+    /* Viewport Header / Control Bar */
+    .viewport-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-card);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .viewport-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .viewport-headline h2 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--navy-950);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .viewport-headline p {
+      font-size: 0.85rem;
+      color: var(--slate-500);
+    }
+
+    .viewport-meta-tally {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sort-selector-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--slate-600);
+    }
+
+    .sort-select {
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      color: var(--navy-900);
+      font-weight: 500;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE CSS GRID: Video / Folio Reviewer Cards
+       ========================================================================== */
+    .folio-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* Semantic Card: <article> */
+    article.folio-card {
+      background: #ffffff;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    article.folio-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(11, 21, 45, 0.1);
+      border-color: var(--gold-500);
+    }
+
+    /* First-Page Thumbnail Preview */
+    .card-thumbnail-viewport {
+      position: relative;
+      height: 180px;
+      background: #111a33;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .card-preview-sheet {
+      width: 82%;
+      height: 88%;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      border-radius: 3px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transform: rotate(-0.5deg);
+      transition: transform 0.2s;
+    }
+
+    article.folio-card:hover .card-preview-sheet {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .preview-header-stamp {
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--navy-700);
+      border-bottom: 1px solid var(--slate-200);
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .preview-math-formula {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--slate-800);
+      background: var(--slate-50);
+      padding: 6px;
+      border-left: 2px solid var(--gold-500);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .preview-dummy-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0.4;
+    }
+
+    .dummy-line {
+      height: 4px;
+      background: var(--slate-400);
+      border-radius: 2px;
+    }
+
+    .dummy-line.short { width: 60%; }
+    .dummy-line.med { width: 85%; }
+    .dummy-line.full { width: 100%; }
+
+    /* Duration Tag Equivalent Overlay */
+    .yt-duration-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(7, 13, 29, 0.9);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 3px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+    }
+
+    /* Top Left Category / Stream Badge */
+    .stream-category-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      z-index: 2;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .badge-olympiad {
+      background: var(--gold-500);
+      color: var(--navy-950);
+    }
+
+    .badge-core {
+      background: var(--navy-700);
+      color: #ffffff;
+    }
+
+    .badge-elective {
+      background: #4338ca;
+      color: #ffffff;
+    }
+
+    /* Card Details Body */
+    .folio-card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 12px;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .subject-tag-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy-800);
+      background: #eef2ff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid #dbeafe;
+    }
+
+    .card-pub-date {
+      font-size: 0.72rem;
+      color: var(--slate-500);
+    }
+
+    .folio-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-950);
+      line-height: 1.35;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.7em;
+    }
+
+    .folio-card-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .folio-card-title a:hover {
+      color: var(--crimson-600);
+    }
+
+    .author-affiliation-line {
+      font-size: 0.78rem;
+      color: var(--slate-600);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--navy-900);
+    }
+
+    .ark-persistent-id {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--slate-500);
+      background: var(--slate-100);
+      padding: 2px 6px;
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    /* Card Action Footer: Citation Button & Read Action */
+    .folio-card-footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .citation-btn {
+      background: transparent;
+      border: 1px solid var(--slate-300);
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .citation-btn:hover {
+      background: var(--slate-100);
+      border-color: var(--navy-900);
+      color: var(--navy-900);
+    }
+
+    .read-folio-btn {
+      background: var(--navy-900);
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s;
+    }
+
+    .read-folio-btn:hover {
+      background: var(--crimson-600);
+    }
+
+    /* Clean Toast notification for Citation copy */
+    .citation-alert-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--navy-950);
+      color: #ffffff;
+      border: 1px solid var(--gold-500);
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 2000;
+    }
+
+    /* Responsive media rules */
+    @media (max-width: 1024px) {
+      aside.hal-sidebar {
+        position: fixed;
+        left: 0;
+        z-index: 900;
+        transform: translateX(-100%);
+      }
+
+      aside.hal-sidebar.active-mobile {
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --topbar-height: 110px;
+      }
+
+      .topbar-primary {
+        gap: 12px;
+        padding: 0 12px;
+      }
+
+      .brand-titles h1 {
+        font-size: 0.95rem;
+      }
+
+      .brand-titles p {
+        display: none;
+      }
+
+      .deposit-cta-btn span.label-text {
+        display: none;
+      }
+
+      .user-info-text {
+        display: none;
+      }
+
+      .folio-grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP BAR (YouTube Style, Fixed Header)
+       ========================================================================== -->
+  <header class="yt-topbar">
+    <div class="topbar-primary">
+      
+      <!-- Brand & Sidebar Toggle -->
+      <div class="brand-cluster">
+        <button type="button" class="sidebar-trigger-btn" id="sidebarToggle" title="Toggle Academic Facet Tree" aria-label="Toggle Navigation">
+          &#9776;
+        </button>
+        <a href="#home" class="brand-logo-wrap">
+          <img src="https://lh3.googleusercontent.com/aida/AEtjO1UP9QnffRchZHGdwnHXqgk7yjgXwaTT2gqL0AwabsPvDIFvpQuXHSU1To4_D4mXDSbGc3_bhjZ5SPIbC8l8RVEEubleuDZyvMc1QoTsDjjM0rIPyWFHkqsj3uFokvP_nOvq30dtZac8h9tUqJkoKc-zM2pmy6ufjj5aOSaM_0xszEQ_GzVkFElKGkqYViz7dmuZicxyiYfolf-AW3bNCJZ5JO0neMEtrSiL9t91NKhMucctojH7wjs0sls" alt="AcademiaX Imperial Crest" class="brand-insignia">
+          <div class="brand-titles">
+            <h1>ACADEMIA<span>X</span></h1>
+            <p>The Imperial Open Archive</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Central Search Bar (YouTube Style) -->
+      <div class="yt-search-container">
+        <form class="yt-search-box" role="search" id="archiveSearchForm">
+          <input type="search" class="yt-search-input" id="archiveSearchInput" placeholder="Search by theorem, topic, author, or persistent ID (AXI-2026-...)" aria-label="Search Archive">
+          <button type="submit" class="yt-search-btn" title="Execute Search">
+            Search
+          </button>
+        </form>
+      </div>
+
+      <!-- User Profile & Action Bar -->
+      <div class="topbar-actions">
+        <button type="button" class="deposit-cta-btn" title="Deposit New Folio Reviewer">
+          <span>+</span>
+          <span class="label-text">Deposit Folio (+50 PTS)</span>
+        </button>
+        <div class="user-profile-badge" title="Academic Identity & Rank">
+          <img src="https://lh3.googleusercontent.com/aida/AEtjO1XFoRFbCTnLlSFydQ1TMt-haXb3QyO5T1oT31DO-gUxljS-wAk45ZMF-9f3rr3a4YTozpBqtMGVExgkjMJWknb5Ri__arAhmDZKekxnsS5bSFjiDS5aNFRKs374D_7GqFDPQvTTpnMISo82XXqNUC1eCCXcsWjTrZFsC2sIOEWGkHew7_8NOSzMlna5OVeniWesqHlVXELU0t2jpzS9GRcJzd_JKgDRoI8s_9L1nwRx8ia5oeFgkCjj-w" alt="Augustin-Louis Laplace Avatar" class="user-avatar-img">
+          <div class="user-info-text">
+            <span class="user-name-title">A. Laplace</span>
+            <span class="user-tier-rank">Maestro • 350 PTS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Subject Filter Chips (YouTube Style Horizontally Scrollable Rail) -->
+    <nav class="topbar-chips-rail" aria-label="Quick Subject Filtering">
+      <a href="#all" class="filter-chip active" data-subject="all">All Disciplines</a>
+      <a href="#physics" class="filter-chip" data-subject="Physics">Physics <span class="chip-count">(245)</span></a>
+      <a href="#chemistry" class="filter-chip" data-subject="Chemistry">Chemistry <span class="chip-count">(148)</span></a>
+      <a href="#biology" class="filter-chip" data-subject="Biology">Biology <span class="chip-count">(164)</span></a>
+      <a href="#cs4" class="filter-chip" data-subject="CS 4">CS 4 (Web Dev) <span class="chip-count">(72)</span></a>
+      <a href="#ss4" class="filter-chip" data-subject="SS 4">SS 4 (Economics) <span class="chip-count">(38)</span></a>
+      <a href="#math" class="filter-chip" data-subject="Math">Math (Calculus &amp; Algebra) <span class="chip-count">(312)</span></a>
+    </nav>
+  </header>
+
+  <!-- ==========================================================================
+       APP LAYOUT SHELL (HAL INRIA Sidebar + Main Viewport)
+       ========================================================================== -->
+  <div class="app-layout-shell">
+
+    <!-- ==========================================================================
+         LEFT SIDEBAR (HAL INRIA Academic Navigation Tree)
+         ========================================================================== -->
+    <aside class="hal-sidebar" id="halSidebar" aria-label="HAL-INRIA Academic Taxonomy Facet Tree">
+      
+      <div class="hal-sidebar-header">
+        <span class="hal-sidebar-title">Taxonomy Facets</span>
+        <a href="#reset" class="hal-reset-link" id="resetFiltersLink">Reset All</a>
+      </div>
+
+      <!-- Facet 1: Discipline -->
+      <section class="facet-group">
+        <h3 class="facet-title">
+          <span>Discipline (Macro Fields)</span>
+          <span class="facet-indicator">&#9662;</span>
+        </h3>
+        <ul class="facet-tree-list">
+          <li>
+            <a href="#disc-math" class="facet-item selected" data-facet="discipline" data-val="Mathematics">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox" checked>
+                <span>Mathematics</span>
+              </span>
+              <span class="facet-tag-counter">312</span>
+            </a>
+          </li>
+          <li>
+            <a href="#disc-phys" class="facet-item" data-facet="discipline" data-val="Physics">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Physics</span>
+              </span>
+              <span class="facet-tag-counter">245</span>
+            </a>
+          </li>
+          <li>
+            <a href="#disc-bio" class="facet-item" data-facet="discipline" data-val="Biology">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Biology</span>
+              </span>
+              <span class="facet-tag-counter">164</span>
+            </a>
+          </li>
+          <li>
+            <a href="#disc-chem" class="facet-item" data-facet="discipline" data-val="Chemistry">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Chemistry</span>
+              </span>
+              <span class="facet-tag-counter">148</span>
+            </a>
+          </li>
+          <li>
+            <a href="#disc-cs" class="facet-item" data-facet="discipline" data-val="Informatics">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>CS &amp; Artificial Intelligence</span>
+              </span>
+              <span class="facet-tag-counter">189</span>
+            </a>
+          </li>
+          <li>
+            <a href="#disc-ss" class="facet-item" data-facet="discipline" data-val="Social Sciences">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Social Sciences &amp; Humanities</span>
+              </span>
+              <span class="facet-tag-counter">86</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Facet 2: Document Type -->
+      <section class="facet-group">
+        <h3 class="facet-title">
+          <span>Document Type</span>
+          <span class="facet-indicator">&#9662;</span>
+        </h3>
+        <ul class="facet-tree-list">
+          <li>
+            <a href="#type-reviewer" class="facet-item selected" data-facet="doctype" data-val="Reviewer">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox" checked>
+                <span>Self-Written Reviewer</span>
+              </span>
+              <span class="facet-tag-counter">+50 PTS</span>
+            </a>
+          </li>
+          <li>
+            <a href="#type-practice" class="facet-item" data-facet="doctype" data-val="Practice Set">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Practice Set &amp; Exam</span>
+              </span>
+              <span class="facet-tag-counter">+40 PTS</span>
+            </a>
+          </li>
+          <li>
+            <a href="#type-folio" class="facet-item" data-facet="doctype" data-val="Folio">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Monographic Folio</span>
+              </span>
+              <span class="facet-tag-counter">+50 PTS</span>
+            </a>
+          </li>
+          <li>
+            <a href="#type-past-exam" class="facet-item" data-facet="doctype" data-val="Past Exam">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Past Olympiad Exam Key</span>
+              </span>
+              <span class="facet-tag-counter">+30 PTS</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Facet 3: Academic Year -->
+      <section class="facet-group">
+        <h3 class="facet-title">
+          <span>Congress Year / Session</span>
+          <span class="facet-indicator">&#9662;</span>
+        </h3>
+        <ul class="facet-tree-list">
+          <li>
+            <a href="#yr-2026" class="facet-item selected" data-facet="year" data-val="2026">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox" checked>
+                <span>Session 2026 (Active)</span>
+              </span>
+              <span class="facet-tag-counter">540</span>
+            </a>
+          </li>
+          <li>
+            <a href="#yr-2025" class="facet-item" data-facet="year" data-val="2025">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Session 2025</span>
+              </span>
+              <span class="facet-tag-counter">480</span>
+            </a>
+          </li>
+          <li>
+            <a href="#yr-2024" class="facet-item" data-facet="year" data-val="2024">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>Session 2024</span>
+              </span>
+              <span class="facet-tag-counter">310</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Facet 4: Author / Faculty -->
+      <section class="facet-group">
+        <h3 class="facet-title">
+          <span>Author / Faculty Lead</span>
+          <span class="facet-indicator">&#9662;</span>
+        </h3>
+        <ul class="facet-tree-list">
+          <li>
+            <a href="#auth-laplace" class="facet-item" data-facet="author" data-val="A. Laplace">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>A. de Laplace (Maestro)</span>
+              </span>
+              <span class="facet-tag-counter">42</span>
+            </a>
+          </li>
+          <li>
+            <a href="#auth-poincare" class="facet-item" data-facet="author" data-val="H. Poincaré">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>H. Poincaré (Rector)</span>
+              </span>
+              <span class="facet-tag-counter">29</span>
+            </a>
+          </li>
+          <li>
+            <a href="#auth-chatelet" class="facet-item" data-facet="author" data-val="É. du Châtelet">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>É. du Châtelet (TrOPhy Lead)</span>
+              </span>
+              <span class="facet-tag-counter">38</span>
+            </a>
+          </li>
+          <li>
+            <a href="#auth-monge" class="facet-item" data-facet="author" data-val="G. Monge">
+              <span class="facet-label-group">
+                <input type="checkbox" class="facet-checkbox">
+                <span>G. Monge (CS/AI Chair)</span>
+              </span>
+              <span class="facet-tag-counter">27</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- HAL Persistent Registry Metadata -->
+      <div class="hal-meta-box">
+        <strong>HAL Open Science Standard</strong>
+        <span>Node: HAL-INRIA Federated OAI-PMH</span><br>
+        <span>ARK: ark:/12148/pshs-mc.0094821</span>
+      </div>
+
+    </aside>
+
+    <!-- ==========================================================================
+         MAIN CONTENT VIEWPORT (Folio Reviewer Cards Grid)
+         ========================================================================== -->
+    <main class="hal-viewport">
+      
+      <!-- Viewport Header -->
+      <section class="viewport-control-bar">
+        <div class="viewport-headline">
+          <h2>Imperial Reviewer &amp; Folio Matrix</h2>
+          <p>Displaying canonical open-access monographs, olympiad problem keys, and syllabi</p>
+        </div>
+        <div class="viewport-meta-tally">
+          <div class="sort-selector-group">
+            <label for="sortFolio">Sort by:</label>
+            <select id="sortFolio" class="sort-select">
+              <option value="points">Points Bounty (High to Low)</option>
+              <option value="rating">Highest Peer Consensus (95%+)</option>
+              <option value="recent">Most Recent Session (2026)</option>
+              <option value="pages">Length / Folio Density</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Responsive CSS Grid of Folio Reviewer Cards -->
+      <div class="folio-grid-container" id="folioGrid">
+
+        <!-- Card 1: Math Olympiad Reviewer -->
+        <article class="folio-card" data-subject="Math" data-doctype="Folio" data-year="2026">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-olympiad">Olympiad MTP</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>MATH-6 [ELECTIVE]</span>
+                <span>FASCICULE IV</span>
+              </div>
+              <div class="preview-math-formula">
+                A = P J P⁻¹, J = ⊕ Jₙᵢ(λᵢ)<br>
+                ker(N⁰) ⊂ ker(N¹) ⊂ ... ⊂ ker(Nᵏ)
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line med"></div>
+                <div class="dummy-line short"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">28 PGS • 4.2 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">Math (Linear Algebra)</span>
+              <time class="card-pub-date" datetime="2026-03-04">04 Mar 2026</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0042">Spectral Decomposition, Jordan Canonical Form &amp; Nilpotent Eigenspaces</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Augustin-Louis Laplace</span>
+              <span>(PSHS Math Faculty)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0042 • ark:/67375/axi-0042</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0042" data-title="Spectral Decomposition, Jordan Canonical Form & Nilpotent Eigenspaces">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0042" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 2: Physics Practice Set -->
+        <article class="folio-card" data-subject="Physics" data-doctype="Practice Set" data-year="2026">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-elective">Elective STEM</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>PHYSICS-5 [ASTROPHYSICS]</span>
+                <span>EXAM PROBLEM SET</span>
+              </div>
+              <div class="preview-math-formula">
+                d²r/dt² = -GM/r² r̂ + ∇Φ_pert<br>
+                T² = (4π²/G(M+m)) a³
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line med"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">24 PGS • 4.8 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">Physics (Astro)</span>
+              <time class="card-pub-date" datetime="2026-02-28">28 Feb 2026</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0078">Keplerian Ephemeris &amp; N-Body Perturbation Orbital Integrations</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Émilie du Châtelet</span>
+              <span>(TrOPhy Lead)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0078 • ark:/67375/axi-0078</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0078" data-title="Keplerian Ephemeris & N-Body Perturbation Orbital Integrations">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0078" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 3: CS 4 Reviewer -->
+        <article class="folio-card" data-subject="CS 4" data-doctype="Reviewer" data-year="2026">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-core">Core CS</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>CS-4 [WEB DEV &amp; ARCH]</span>
+                <span>SYLLABUS REVIEWER</span>
+              </div>
+              <div class="preview-math-formula">
+                DOM Engine &bull; Virtual Reconciliation<br>
+                O(V + E) DAG Topological Route
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line short"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">16 PGS • 2.1 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">CS 4 (Web Dev)</span>
+              <time class="card-pub-date" datetime="2026-02-14">14 Feb 2026</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0105">Modern Web Engine Architecture, CSS Grid Layouts &amp; Asynchronous Pipelines</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Gaspard Monge</span>
+              <span>(CS Informatics)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0105 • ark:/67375/axi-0105</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0105" data-title="Modern Web Engine Architecture, CSS Grid Layouts & Asynchronous Pipelines">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0105" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 4: Chemistry Past Exam -->
+        <article class="folio-card" data-subject="Chemistry" data-doctype="Past Exam" data-year="2025">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-elective">Elective STEM</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>CHEMISTRY-4 [ORGANIC]</span>
+                <span>SOLUTION KEY</span>
+              </div>
+              <div class="preview-math-formula">
+                [H⁺][A⁻]/[HA] = Ka &bull; ΔG° = -RT ln K<br>
+                Hartree-Fock: F|φᵢ⟩ = εᵢ|φᵢ⟩
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line med"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">20 PGS • 3.9 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">Chemistry (Physical)</span>
+              <time class="card-pub-date" datetime="2025-11-20">20 Nov 2025</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0311">Hartree-Fock Self-Consistent Field &amp; Spectroscopic Molecular Orbitals</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Antoine Lavoisier</span>
+              <span>(Chemistry Chair)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0311 • ark:/67375/axi-0311</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0311" data-title="Hartree-Fock Self-Consistent Field & Spectroscopic Molecular Orbitals">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0311" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 5: Biology Reviewer -->
+        <article class="folio-card" data-subject="Biology" data-doctype="Reviewer" data-year="2026">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-core">Core STEM</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>BIOLOGY-3 [CELL &amp; MOL]</span>
+                <span>COMPREHENSIVE GUIDE</span>
+              </div>
+              <div class="preview-math-formula">
+                CRISPR-Cas9 Cleavage Vector Analysis<br>
+                NHEJ vs HDR Repair Frequency Matrix
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line med"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">32 PGS • 6.2 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">Biology (Molecular)</span>
+              <time class="card-pub-date" datetime="2026-01-18">18 Jan 2026</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0219">CRISPR-Cas Off-Target Minimization in Cellular Recombination Pathways</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Sophie Germain</span>
+              <span>(Senior Inspector)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0219 • ark:/67375/axi-0219</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0219" data-title="CRISPR-Cas Off-Target Minimization in Cellular Recombination Pathways">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0219" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+        <!-- Card 6: SS 4 Reviewer -->
+        <article class="folio-card" data-subject="SS 4" data-doctype="Reviewer" data-year="2025">
+          <div class="card-thumbnail-viewport">
+            <span class="stream-category-badge badge-core">Humanities</span>
+            <div class="card-preview-sheet">
+              <div class="preview-header-stamp">
+                <span>SS-4 [ECONOMICS &amp; FUTURES]</span>
+                <span>THEORY REVIEWER</span>
+              </div>
+              <div class="preview-math-formula">
+                Cobb-Douglas: Y = A K^α L^(1-α)<br>
+                Pareto Efficiency &amp; Social Optimum
+              </div>
+              <div class="preview-dummy-lines">
+                <div class="dummy-line full"></div>
+                <div class="dummy-line short"></div>
+              </div>
+            </div>
+            <span class="yt-duration-badge">18 PGS • 2.6 MB</span>
+          </div>
+          <div class="folio-card-body">
+            <div class="card-meta-row">
+              <span class="subject-tag-pill">SS 4 (Economics)</span>
+              <time class="card-pub-date" datetime="2025-12-10">10 Dec 2025</time>
+            </div>
+            <h3 class="folio-card-title">
+              <a href="#read-axi-0498">Macroeconomic Equilibrium, General Welfare &amp; Public Good Subsidization</a>
+            </h3>
+            <div class="author-affiliation-line">
+              <span>By</span>
+              <span class="author-name">Henri Poincaré</span>
+              <span>(Council of Sages)</span>
+            </div>
+            <code class="ark-persistent-id">AXI-2026-0498 • ark:/67375/axi-0498</code>
+            <footer class="folio-card-footer">
+              <button type="button" class="citation-btn" data-ark="AXI-2026-0498" data-title="Macroeconomic Equilibrium, General Welfare & Public Good Subsidization">
+                &ldquo; Cite
+              </button>
+              <a href="#read-axi-0498" class="read-folio-btn">Read Folio &rarr;</a>
+            </footer>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Citation Feedback Toast -->
+  <div class="citation-alert-toast" id="citationToast" role="status" aria-live="polite">
+    Citation copied to clipboard (BibTeX &amp; HAL Persistent ARK format).
+  </div>
+
+  <!-- ==========================================================================
+       MINIMAL VANILLA JS FOR FILTERING, SIDEBAR TOGGLE, AND CITATIONS
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const halSidebar = document.getElementById('halSidebar');
+      const searchForm = document.getElementById('archiveSearchForm');
+      const searchInput = document.getElementById('archiveSearchInput');
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const folioCards = document.querySelectorAll('.folio-card');
+      const citationButtons = document.querySelectorAll('.citation-btn');
+      const citationToast = document.getElementById('citationToast');
+      const resetFiltersLink = document.getElementById('resetFiltersLink');
+
+      // 1. Collapsible Sidebar Toggle
+      sidebarToggle.addEventListener('click', () => {
+        if (window.innerWidth <= 1024) {
+          halSidebar.classList.toggle('active-mobile');
+        } else {
+          halSidebar.classList.toggle('collapsed');
+        }
+      });
+
+      // 2. YouTube Style Subject Filter Chips
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          e.preventDefault();
+          filterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          const subject = chip.getAttribute('data-subject');
+          filterCardsBySubject(subject);
+        });
+      });
+
+      function filterCardsBySubject(subject) {
+        folioCards.forEach(card => {
+          const cardSubject = card.getAttribute('data-subject');
+          if (subject === 'all' || cardSubject === subject) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // 3. Search Bar Filter
+      searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = searchInput.value.toLowerCase().trim();
+        folioCards.forEach(card => {
+          const title = card.querySelector('.folio-card-title').textContent.toLowerCase();
+          const author = card.querySelector('.author-name').textContent.toLowerCase();
+          const ark = card.querySelector('.ark-persistent-id').textContent.toLowerCase();
+          const matches = title.includes(query) || author.includes(query) || ark.includes(query);
+          card.style.display = (matches || query === '') ? 'flex' : 'none';
+        });
+      });
+
+      // 4. Citation Button Handler
+      citationButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const ark = btn.getAttribute('data-ark');
+          const title = btn.getAttribute('data-title');
+          const bibtex = `@article{academiax_${ark},\n  title = {${title}},\n  journal = {AcademiaX Imperial Open Archive},\n  year = {2026},\n  url = {https://hal.archives-ouvertes.fr/${ark}}\n}`;
+          
+          navigator.clipboard.writeText(bibtex).then(() => {
+            showToast(`BibTeX citation for ${ark} copied.`);
+          }).catch(() => {
+            showToast(`Reference ${ark} referenced.`);
+          });
+        });
+      });
+
+      function showToast(msg) {
+        citationToast.textContent = msg;
+        citationToast.style.display = 'block';
+        setTimeout(() => {
+          citationToast.style.display = 'none';
+        }, 3200);
+      }
+
+      // 5. Reset All Filters
+      if (resetFiltersLink) {
+        resetFiltersLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          searchInput.value = '';
+          filterChips.forEach(c => c.classList.remove('active'));
+          const allChip = document.querySelector('.filter-chip[data-subject="all"]');
+          if (allChip) allChip.classList.add('active');
+          folioCards.forEach(card => card.style.display = 'flex');
+          showToast('All taxonomy filters reset to default.');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

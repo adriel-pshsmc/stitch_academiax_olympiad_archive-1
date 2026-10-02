@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AcademiaX: Imperial Open Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#171c1f",
+            "tertiary-container": "#291c00",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e4e9ed",
+            "secondary-fixed": "#ffdadb",
+            "on-secondary-fixed-variant": "#920029",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "tertiary": "#080400",
+            "on-primary-container": "#7786a5",
+            "secondary-fixed-dim": "#ffb2b7",
+            "tertiary-fixed": "#ffdf9c",
+            "primary-container": "#0e1e38",
+            "secondary": "#b80938",
+            "outline": "#75777e",
+            "background": "#f6fafe",
+            "surface-dim": "#d6dade",
+            "tertiary-fixed-dim": "#f0c04f",
+            "surface": "#f6fafe",
+            "surface-container-low": "#f0f4f8",
+            "on-tertiary-fixed": "#251a00",
+            "error-container": "#ffdad6",
+            "secondary-container": "#db2e4e",
+            "on-primary-fixed": "#0b1b35",
+            "surface-container": "#eaeef2",
+            "primary": "#000513",
+            "inverse-surface": "#2c3134",
+            "surface-variant": "#dfe3e7",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#384763",
+            "on-tertiary-fixed-variant": "#5b4300",
+            "on-tertiary-container": "#a8800b",
+            "on-surface-variant": "#44474d",
+            "inverse-on-surface": "#edf1f5",
+            "on-surface": "#171c1f",
+            "primary-fixed-dim": "#b8c7e9",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f6fafe",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#dfe3e7",
+            "surface-tint": "#505f7c",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#40000d",
+            "outline-variant": "#c5c6ce",
+            "primary-fixed": "#d7e2ff",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b8c7e9"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            margin: "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Playfair Display"],
+            "label-code": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "title-lg": ["Inter"],
+            "headline-md": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "label-badge": ["Inter"],
+            "headline-lg-mobile": ["Playfair Display"],
+            display: ["Cinzel", "serif"],
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "title-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+            "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+            "label-code": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }],
+            "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+            "title-lg": ["16px", { lineHeight: "22px", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+            "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "label-badge": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }],
+            "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html {
+        color: #171c1f;
+        background-color: #f6fafe;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="bg-background text-on-background font-sans min-h-screen antialiased flex flex-col">
+<!-- FIXED TOPBAR (YouTube-style fixed header, height 112px / 28rem total: primary 64px + subrail 48px) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-container border-b-2 border-tertiary-fixed-dim shadow-md">
+<!-- Primary Bar (64px) -->
+<div class="h-16 px-gutter flex items-center justify-between gap-space-lg">
+<!-- Brand Cluster & Sidebar Trigger -->
+<div class="flex items-center gap-space-md min-w-[260px]">
+<button aria-label="Toggle Academic Facet Sidebar" class="w-10 h-10 rounded flex items-center justify-center text-tertiary-fixed hover:bg-white/10 transition-colors" id="halSidebarToggle" title="Toggle Academic Taxonomy Facets" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<a class="flex items-center gap-space-sm group text-decoration-none" data-path="index" href="index.html">
+<div class="w-9 h-9 rounded-full bg-primary border border-tertiary-fixed-dim flex items-center justify-center text-tertiary-fixed font-display font-bold text-sm tracking-widest">
+            AX
+          </div>
+<div class="flex flex-col leading-tight">
+<span class="font-display font-bold text-base text-white tracking-widest uppercase">
+              Academia<span class="text-tertiary-fixed-dim">X</span>
+</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.14em] text-on-primary-container font-medium">
+              The Imperial Open Archive
+            </span>
+</div>
+</a>
+</div>
+<!-- Central Omnibox Search Bar (YouTube style) -->
+<div class="flex-1 max-w-2xl">
+<form action="index.html" class="flex items-center w-full bg-primary border border-tertiary-fixed-dim/40 rounded-full overflow-hidden focus-within:border-tertiary-fixed transition-colors shadow-inner" method="GET" role="search">
+<div class="pl-4 text-on-primary-container flex items-center">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+<input aria-label="Search Archive" class="w-full bg-transparent px-space-sm py-2 text-white font-sans text-body-md placeholder:text-on-primary-container/70 placeholder:italic focus:outline-none" name="q" placeholder="Search theorem, registry ID (AXI-2026-...), author, or DOI..." type="search"/>
+<button class="bg-primary-container hover:bg-slate-800 text-tertiary-fixed px-space-lg py-2 border-l border-tertiary-fixed-dim/30 font-title-md text-xs uppercase tracking-wider transition-colors flex items-center gap-1" title="Execute Search" type="submit">
+            Search
+          </button>
+</form>
+</div>
+<!-- Global Shell Actions & Profile Badge -->
+<div class="flex items-center gap-space-md justify-end min-w-[280px]">
+<a class="bg-secondary hover:bg-on-secondary-fixed-variant text-white font-title-md text-xs uppercase tracking-wider px-space-md py-2 rounded border border-white/20 transition-all flex items-center gap-1.5 shadow-sm" data-path="submit" href="submit.html">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Deposit Folio (+50 PTS)</span>
+</a>
+<a class="flex items-center gap-space-sm bg-white/5 hover:bg-white/10 border border-tertiary-fixed-dim/30 px-3 py-1.5 rounded-full transition-colors text-decoration-none" data-path="panelist-detail" href="panelist-detail.html" title="Curator Dossier &amp; Rank">
+<div class="w-7 h-7 rounded-full bg-tertiary-container border border-tertiary-fixed-dim text-tertiary-fixed flex items-center justify-center font-display text-xs font-bold">
+            AL
+          </div>
+<div class="flex flex-col text-left leading-none">
+<span class="text-white font-title-md text-xs">A. Laplace</span>
+<span class="text-tertiary-fixed-dim font-mono text-[10px]">Maestro • 350 PTS</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Sub-bar: Global Route Navigation & Subject Quick Filter Rail (48px) -->
+<nav aria-label="Global Navigation and Taxonomy Rail" class="h-12 bg-primary px-gutter flex items-center gap-space-sm overflow-x-auto border-t border-white/10 text-xs font-sans" data-active-classes="border-tertiary-fixed-dim text-white bg-white/15">
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="index" href="index.html">Main Repository</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="subject-hub" href="subject-hub.html">Subject Landing</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="reviewer" href="reviewer.html">Document Reader</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelists" href="panelists.html">Panelist Directory</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelist-detail" href="panelist-detail.html">Panelist Profile</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="submit" href="submit.html">Upload Portal</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="about" href="about.html">Archive Rubric</a>
+</nav>
+</header>
+<!-- APP SHELL WRAPPER (Top padding matches header 112px / 28rem total: pt-28) -->
+<div class="flex-1 flex w-full pt-28">
+<!-- PERSISTENT LEFT SIDEBAR: HAL-INRIA Academic Facet Taxonomy -->
+<aside aria-label="HAL-INRIA Academic Taxonomy Facet Tree" class="w-72 shrink-0 bg-surface-container-low border-r border-outline-variant/40 sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto p-4 flex flex-col gap-5 transition-all duration-200 z-30" id="halSidebar">
+<div class="flex items-center justify-between pb-3 border-b-2 border-primary-container">
+<span class="font-display font-bold text-xs uppercase tracking-wider text-primary-container">Taxonomy Facets</span>
+<a class="text-[11px] font-title-md uppercase text-secondary hover:underline" href="index.html">Reset Filters</a>
+</div>
+<!-- Facet: Discipline / Macro Fields -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Discipline</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Mathematics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">312</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>Physics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">245</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span>Informatics &amp; AI</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">189</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Chemistry &amp; Bio</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">164</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Social Sciences</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">86</span>
+</a>
+</div>
+</div>
+<!-- Facet: Document Type & Weighting -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Document Format</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Self-Written Reviewer</span>
+<span class="font-mono text-[10px] text-secondary font-semibold">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Practice Exam Keys</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+40 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Monographic Folios</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Past Olympiad Proofs</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+30 PTS</span>
+</a>
+</div>
+</div>
+<!-- Facet: Archive Session Year -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Congress Session</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs bg-surface-container font-title-md text-primary-container">
+<span>Session 2026 (Active)</span>
+<span class="font-mono text-[11px]">540</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2025</span>
+<span class="font-mono text-[11px]">480</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2024</span>
+<span class="font-mono text-[11px]">310</span>
+</div>
+</div>
+</div>
+<!-- HAL-INRIA Node Metadata Stamp -->
+<div class="mt-auto p-3 bg-surface-container rounded border border-outline-variant/50 text-[11px] text-on-surface-variant leading-relaxed">
+<div class="font-title-md text-primary-container uppercase tracking-wider mb-1">HAL Open Science Registry</div>
+<div class="font-mono text-[10px]">Node: HAL-INRIA PSHS-MC</div>
+<div class="font-mono text-[10px] text-outline">ARK: ark:/12148/axi.2026</div>
+</div>
+</aside>
+<!-- MAIN CONTENT VIEWPORT -->
+<main class="flex-1 min-w-0 bg-background">
+<div class="flex flex-col w-full">
+<div class="px-gutter py-space-lg max-w-7xl mx-auto w-full flex flex-col gap-space-xl">
+<!-- HEADER & GAMIFIED SENATE BOUNTY STRIP -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg bg-surface-container-low p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-code text-label-code text-secondary font-semibold uppercase tracking-wider">HAL-INRIA Accession Portal</span>
+<span class="text-outline text-body-sm">•</span>
+<span class="font-label-badge text-label-badge bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase">Curatorial Registry 2026</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Deposit Scholarly Folio &amp; Enter Senate Queue</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Contribute peer-reviewed reference materials, rigorous derivations, or authoritative practice keys to the Imperial Open Archive. Folios are vetted by the Archival Panel before permanent accession.
+        </p>
+</div>
+<!-- Point Bounty Metric Chips -->
+<div class="flex items-center gap-space-sm bg-surface-container-lowest p-space-sm rounded-lg shadow-sm">
+<div class="flex flex-col items-center justify-center px-4 py-2 bg-surface-container rounded text-center">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">+50</span>
+<span class="font-label-code text-[11px] text-on-surface-variant font-medium">Guide / Folio</span>
+</div>
+<div class="flex flex-col items-center justify-center px-4 py-2 bg-surface-container rounded text-center">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">+40</span>
+<span class="font-label-code text-[11px] text-on-surface-variant font-medium">Exam Sets</span>
+</div>
+<div class="flex flex-col items-center justify-center px-4 py-2 bg-surface-container rounded text-center">
+<span class="font-headline-sm text-headline-sm text-on-tertiary-container font-bold">+30</span>
+<span class="font-label-code text-[11px] text-on-surface-variant font-medium">Solution Key</span>
+</div>
+</div>
+</div>
+<!-- MAIN TWO-COLUMN DEPOSIT FORM -->
+<form class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start" id="folioDepositForm">
+<!-- LEFT PRIMARY DOSSIER COLUMN (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- SECTION 1: DRAG & DROP MANUSCRIPT UPLOAD -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">upload_file</span>
+              1. Digital Monograph or Folio (PDF)
+            </h2>
+<span class="font-label-code text-label-code text-on-surface-variant">Max Size: 25.0 MB</span>
+</div>
+<!-- Interactive Upload Drop Zone -->
+<div class="group relative flex flex-col items-center justify-center p-space-xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer rounded-xl text-center shadow-inner" id="dropZone">
+<input accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" id="fileInput" type="file"/>
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container mb-space-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+</div>
+<span class="font-title-md text-title-md text-primary">Drop authoritative manuscript here or browse files</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-sm">
+              Strictly PDF formats conforming to ISO-19005 (PDF/A). Automated metadata harvesting will parse math notation and embedded vector figures.
+            </p>
+<!-- File Preview Chip (Hidden initially) -->
+<div class="hidden mt-space-md items-center gap-space-sm bg-surface-container-lowest px-4 py-2 rounded-full shadow-sm text-left" id="fileChip">
+<span class="material-symbols-outlined text-secondary text-[20px]">picture_as_pdf</span>
+<div class="flex flex-col">
+<span class="font-title-md text-xs text-primary font-semibold truncate max-w-xs" id="fileName">manuscript.pdf</span>
+<span class="font-label-code text-[10px] text-outline" id="fileSize">0.0 MB</span>
+</div>
+<button class="text-outline hover:text-error ml-2" id="removeFileBtn" title="Remove folio" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SECTION 2: METADATA DOSSIER -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-xs">
+<h2 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">subject</span>
+              2. Bibliographic &amp; Archival Metadata
+            </h2>
+<span class="font-label-code text-label-code text-outline">ARK Specification 2026</span>
+</div>
+<!-- Folio Title -->
+<div class="flex flex-col gap-1.5">
+<label class="font-title-md text-body-md text-primary" for="folioTitle">Folio Canonical Title <span class="text-error">*</span></label>
+<input class="bg-surface-container-low px-4 py-3 rounded text-primary font-sans text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="folioTitle" placeholder="e.g., Comprehensive Analysis of Fluidic Tensors &amp; Navier-Stokes Approximations" required="" type="text"/>
+</div>
+<!-- Subtitle / Archival Abstract -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-title-md text-body-md text-primary" for="abstract">Abstract &amp; Thematic Exposition <span class="text-error">*</span></label>
+<span class="font-label-code text-[11px] text-outline">LaTeX syntax enabled: $...$</span>
+</div>
+<textarea class="bg-surface-container-low px-4 py-3 rounded text-primary font-sans text-body-md placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner resize-y" id="abstract" placeholder="Outline the pedagogical scope, primary theorems proven, and target cohort applicability..." required="" rows="4"></textarea>
+</div>
+<!-- Two-column author & affiliation inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-title-md text-body-md text-primary" for="leadAuthor">Primary Author / Scribe <span class="text-error">*</span></label>
+<input class="bg-surface-container-low px-4 py-2.5 rounded text-primary font-sans text-body-md focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="leadAuthor" required="" type="text" value="Archivist A. Laplace"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-title-md text-body-md text-primary" for="affiliation">Institutional Laboratory / Cluster <span class="text-error">*</span></label>
+<input class="bg-surface-container-low px-4 py-2.5 rounded text-primary font-sans text-body-md focus:outline-none focus:bg-surface-container-lowest transition-colors shadow-inner" id="affiliation" required="" type="text" value="PSHS-MC Main Campus • Div. of Theoretical Physics"/>
+</div>
+</div>
+</div>
+<!-- SECTION 3: SUBJECT TAXONOMY & ELECTIVES -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<h2 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">account_tree</span>
+            3. PSHS-MC Curricular Classification
+          </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-center">
+<!-- Macro Discipline Dropdown -->
+<div class="flex flex-col gap-1.5">
+<label class="font-title-md text-body-md text-primary" for="macroDiscipline">Macro Academic Discipline</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low text-primary px-4 py-3 rounded font-sans text-body-md focus:outline-none focus:bg-surface-container-lowest shadow-inner cursor-pointer" id="macroDiscipline">
+<option value="math">Mathematics (Pure &amp; Applied Analysis)</option>
+<option value="physics">Physics &amp; Continuum Mechanics</option>
+<option value="bio">Biological Sciences &amp; Biochemistry</option>
+<option value="chem">Chemistry &amp; Crystallography</option>
+<option value="cs">Computer Science &amp; Artificial Intelligence</option>
+<option value="earth">Earth &amp; Planetary Sciences</option>
+<option value="research">Science Research &amp; Capstone Methodology</option>
+<option value="adtech">Advanced Engineering &amp; ADTech</option>
+<option value="humanities">Humanities &amp; Epistemology</option>
+<option value="socsci">Social Sciences &amp; Political Economy</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">unfold_more</span>
+</div>
+</div>
+</div>
+<!-- Elective Checkbox Pill -->
+<div class="flex flex-col justify-end pt-2">
+<label class="flex items-center gap-space-md p-3 bg-surface-container-low rounded cursor-pointer hover:bg-surface-container transition-colors">
+<input class="w-5 h-5 rounded text-primary focus:ring-0 cursor-pointer" id="electiveOption" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-title-md text-body-md text-primary">Specialized Elective Option</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tags this folio as Grade 11-12 specialized honors coursework</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- SECTION 4: HONOR CODE & SOLEMN OBLIGATION -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<h2 class="font-title-lg text-title-lg text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">verified_user</span>
+            4. Archival Honor &amp; Originality Covenant
+          </h2>
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-start gap-space-md">
+<input class="mt-1 w-5 h-5 rounded text-primary focus:ring-0 cursor-pointer" id="honorCheck" required="" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="honorCheck">
+              I solemnly certify under the HAL-INRIA archival rubric that this repository deposit represents authentic, self-authored derivations, original pedagogical synthesis, or verified open exam annotations. It contains no unauthorized reproductions, respects institutional copyright, and grants AcademiaX an irrevocable open-access distribution license.
+            </label>
+</div>
+</div>
+</div>
+<!-- RIGHT SIDEBAR: TYPOLOGY, CHAIR SELECTION & CTAs (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- TYPOLOGY & BOUNTY CALCULATOR -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-lg text-title-lg text-primary">Document Typology</span>
+<span class="font-label-badge text-label-badge bg-secondary text-white px-2 py-0.5 rounded font-bold uppercase" id="currentBountyBadge">+50 PTS</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Merit rewards are granted to your archival account immediately upon affirmative panelist quorum.
+          </p>
+<div class="flex flex-col gap-space-sm" id="typologyGroup">
+<!-- Option 1: Guide -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<input checked="" class="w-4 h-4 text-primary focus:ring-0 cursor-pointer" name="typology" type="radio" value="50"/>
+<div class="flex flex-col">
+<span class="font-title-md text-body-md text-primary">Self-Written Reviewer</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Monographic theory &amp; proof sets</span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-secondary font-bold">+50 PTS</span>
+</label>
+<!-- Option 2: Practice Exam -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<input class="w-4 h-4 text-primary focus:ring-0 cursor-pointer" name="typology" type="radio" value="40"/>
+<div class="flex flex-col">
+<span class="font-title-md text-body-md text-primary">Practice Exam Set</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Mock papers &amp; test questions</span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-primary font-bold">+40 PTS</span>
+</label>
+<!-- Option 3: Solution Key -->
+<label class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<input class="w-4 h-4 text-primary focus:ring-0 cursor-pointer" name="typology" type="radio" value="30"/>
+<div class="flex flex-col">
+<span class="font-title-md text-body-md text-primary">Solution Key &amp; Rubric</span>
+<span class="font-body-sm text-xs text-on-surface-variant">Detailed step-by-step corrections</span>
+</div>
+</div>
+<span class="font-label-code text-label-code text-on-tertiary-container font-bold">+30 PTS</span>
+</label>
+</div>
+</div>
+<!-- TARGET PANELIST CHAIR ASSIGNMENT -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-lg text-title-lg text-primary">Target Panelist Quorum</span>
+<span class="material-symbols-outlined text-outline text-[18px]" title="Assigned chairs expedite review within 48h">help_outline</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Nominate up to 3 certified senate chairs to evaluate your proof methodology.
+          </p>
+<div class="flex flex-col gap-space-sm">
+<!-- Panelist 1 -->
+<label class="flex items-center gap-space-sm p-2 rounded hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" name="chairs" type="checkbox" value="laplace"/>
+<div class="w-7 h-7 rounded-full bg-primary-container text-tertiary-fixed font-display text-xs flex items-center justify-center font-bold">
+                PL
+              </div>
+<div class="flex flex-col">
+<span class="font-title-md text-xs text-primary font-semibold">Dr. Pierre-Simon Laplace</span>
+<span class="font-label-code text-[10px] text-outline">Chair of Applied Analysis</span>
+</div>
+</label>
+<!-- Panelist 2 -->
+<label class="flex items-center gap-space-sm p-2 rounded hover:bg-surface-container-low cursor-pointer transition-colors">
+<input class="w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" name="chairs" type="checkbox" value="poincare"/>
+<div class="w-7 h-7 rounded-full bg-secondary text-white font-display text-xs flex items-center justify-center font-bold">
+                HP
+              </div>
+<div class="flex flex-col">
+<span class="font-title-md text-xs text-primary font-semibold">Dr. Henri Poincaré</span>
+<span class="font-label-code text-[10px] text-outline">Chair of Topology &amp; Systems</span>
+</div>
+</label>
+<!-- Panelist 3 -->
+<label class="flex items-center gap-space-sm p-2 rounded hover:bg-surface-container-low cursor-pointer transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-0 cursor-pointer" name="chairs" type="checkbox" value="chatelet"/>
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed-dim text-on-tertiary-fixed font-display text-xs flex items-center justify-center font-bold">
+                EC
+              </div>
+<div class="flex flex-col">
+<span class="font-title-md text-xs text-primary font-semibold">Dr. Émilie du Châtelet</span>
+<span class="font-label-code text-[10px] text-outline">Chair of Classical Mechanics</span>
+</div>
+</label>
+</div>
+</div>
+<!-- ACTION CTAS -->
+<div class="flex flex-col gap-space-sm">
+<button class="w-full bg-secondary hover:bg-on-secondary-fixed-variant text-white font-title-md text-body-md py-3.5 px-space-lg rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider" type="submit">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span id="submitCtaText">Deposit Folio to Peer Review (+50 PTS)</span>
+</button>
+<button class="w-full bg-surface-container hover:bg-surface-container-high text-primary font-title-md text-body-md py-3 px-space-lg rounded-lg transition-colors flex items-center justify-center gap-2" id="saveDraftBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Save Working Draft to Archive</span>
+</button>
+<p class="font-body-sm text-[11px] text-center text-outline mt-1">
+            Transmitted via SHA-256 encrypted peer-review pipeline. ARK persistent identifier generated upon confirmation.
+          </p>
+</div>
+</div>
+</form>
+<!-- ARCHIVE CURATOR EMBLEMS & STANDARDS BENCHMARK -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-md">
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">balance</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary">Senate Quorum Required</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Two affirmative votes from verified Faculty Reviewers required before public repository indexing.</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary">Permanent Inscription</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Validated items receive an indelible HAL-INRIA ARK identifier accessible across open scholar indices.</span>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-low rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[24px]">military_tech</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary">Curator Laurels</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Earn points to unlock Senate voting rights, honorary badges, and high-prestige reviewer credentials.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE LOGIC: Typology Bounty Switching & File Drag-and-Drop Validator -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic Typology Bounty Updates
+      const radios = document.querySelectorAll('input[name="typology"]');
+      const bountyBadge = document.getElementById('currentBountyBadge');
+      const submitCta = document.getElementById('submitCtaText');
+
+      radios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          const val = e.target.value;
+          bountyBadge.textContent = `+${val} PTS`;
+          submitCta.textContent = `Deposit Folio to Peer Review (+${val} PTS)`;
+        });
+      });
+
+      // Drag and drop PDF file handler
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('fileInput');
+      const fileChip = document.getElementById('fileChip');
+      const fileName = document.getElementById('fileName');
+      const fileSize = document.getElementById('fileSize');
+      const removeBtn = document.getElementById('removeFileBtn');
+
+      function handleFile(file) {
+        if (!file) return;
+        if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('Archival Error: Only formal PDF documents are supported for accession.');
+          return;
+        }
+        if (file.size > 25 * 1024 * 1024) {
+          alert('Archival Error: Folio file exceeds the maximum 25.0 MB volume.');
+          return;
+        }
+
+        fileName.textContent = file.name;
+        fileSize.textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+        fileChip.classList.remove('hidden');
+        fileChip.classList.add('flex');
+      }
+
+      fileInput.addEventListener('change', (e) => {
+        handleFile(e.target.files[0]);
+      });
+
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fileInput.value = '';
+        fileChip.classList.add('hidden');
+        fileChip.classList.remove('flex');
+      });
+
+      // Dragging states
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropZone.classList.add('bg-surface-container-high');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropZone.classList.remove('bg-surface-container-high');
+        });
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Save Draft Toast simulation
+      const saveDraftBtn = document.getElementById('saveDraftBtn');
+      saveDraftBtn.addEventListener('click', () => {
+        const title = document.getElementById('folioTitle').value || 'Untitled Working Folio';
+        alert(`Draft successfully archived locally: "${title}". You may resume this deposit anytime from your Curator Dossier.`);
+      });
+
+      // Form Submission Validation
+      const form = document.getElementById('folioDepositForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const file = fileInput.files[0];
+        const honorCheck = document.getElementById('honorCheck').checked;
+
+        if (!file && fileChip.classList.contains('hidden')) {
+          alert('Validation Notice: Please attach a PDF manuscript before depositing to the Senate Queue.');
+          return;
+        }
+
+        if (!honorCheck) {
+          alert('Validation Notice: You must agree to the Archival Honor & Originality Covenant.');
+          return;
+        }
+
+        const selectedPoints = document.querySelector('input[name="typology"]:checked').value;
+        alert(`Folio successfully entered into Senate Quorum Queue! Tracking ARK assigned: ark:/12148/axi.2026.fol.${Math.floor(1000 + Math.random() * 9000)}. Potential Reward: +${selectedPoints} PTS.`);
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</div>
+</main>
+</div>
+<!-- VANILLA INTERACTIVITY: Mobile/Desktop Sidebar Toggle & Active Route Detection -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('halSidebarToggle');
+      const sidebar = document.getElementById('halSidebar');
+      
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+
+      // Dynamic active state highlight based on current pathname
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const cleanCurrent = currentPath.replace('.html', '');
+      const navLinks = document.querySelectorAll('header nav a[data-path]');
+      const activeClasses = (document.querySelector('header nav')?.getAttribute('data-active-classes') || 'text-white border-tertiary-fixed-dim bg-white/15').split(' ');
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('data-path');
+        if (linkPath === cleanCurrent || (cleanCurrent === '' && linkPath === 'index')) {
+          link.classList.add(...activeClasses);
+        }
+      });
+    });
+  </script>
+</body></html>

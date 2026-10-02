@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AcademiaX: Imperial Open Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#171c1f",
+            "tertiary-container": "#291c00",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e4e9ed",
+            "secondary-fixed": "#ffdadb",
+            "on-secondary-fixed-variant": "#920029",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "tertiary": "#080400",
+            "on-primary-container": "#7786a5",
+            "secondary-fixed-dim": "#ffb2b7",
+            "tertiary-fixed": "#ffdf9c",
+            "primary-container": "#0e1e38",
+            "secondary": "#b80938",
+            "outline": "#75777e",
+            "background": "#f6fafe",
+            "surface-dim": "#d6dade",
+            "tertiary-fixed-dim": "#f0c04f",
+            "surface": "#f6fafe",
+            "surface-container-low": "#f0f4f8",
+            "on-tertiary-fixed": "#251a00",
+            "error-container": "#ffdad6",
+            "secondary-container": "#db2e4e",
+            "on-primary-fixed": "#0b1b35",
+            "surface-container": "#eaeef2",
+            "primary": "#000513",
+            "inverse-surface": "#2c3134",
+            "surface-variant": "#dfe3e7",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#384763",
+            "on-tertiary-fixed-variant": "#5b4300",
+            "on-tertiary-container": "#a8800b",
+            "on-surface-variant": "#44474d",
+            "inverse-on-surface": "#edf1f5",
+            "on-surface": "#171c1f",
+            "primary-fixed-dim": "#b8c7e9",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f6fafe",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#dfe3e7",
+            "surface-tint": "#505f7c",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#40000d",
+            "outline-variant": "#c5c6ce",
+            "primary-fixed": "#d7e2ff",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b8c7e9"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            margin: "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Playfair Display"],
+            "label-code": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "title-lg": ["Inter"],
+            "headline-md": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "label-badge": ["Inter"],
+            "headline-lg-mobile": ["Playfair Display"],
+            display: ["Cinzel", "serif"],
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "title-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+            "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+            "label-code": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }],
+            "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+            "title-lg": ["16px", { lineHeight: "22px", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+            "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "label-badge": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }],
+            "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html {
+        color: #171c1f;
+        background-color: #f6fafe;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="bg-background text-on-background font-sans min-h-screen antialiased flex flex-col">
+<!-- FIXED TOPBAR (YouTube-style fixed header, height 112px / 28rem total: primary 64px + subrail 48px) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-container border-b-2 border-tertiary-fixed-dim shadow-md">
+<!-- Primary Bar (64px) -->
+<div class="h-16 px-gutter flex items-center justify-between gap-space-lg">
+<!-- Brand Cluster & Sidebar Trigger -->
+<div class="flex items-center gap-space-md min-w-[260px]">
+<button aria-label="Toggle Academic Facet Sidebar" class="w-10 h-10 rounded flex items-center justify-center text-tertiary-fixed hover:bg-white/10 transition-colors" id="halSidebarToggle" title="Toggle Academic Taxonomy Facets" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<a class="flex items-center gap-space-sm group text-decoration-none" data-path="index" href="index.html">
+<div class="w-9 h-9 rounded-full bg-primary border border-tertiary-fixed-dim flex items-center justify-center text-tertiary-fixed font-display font-bold text-sm tracking-widest">
+            AX
+          </div>
+<div class="flex flex-col leading-tight">
+<span class="font-display font-bold text-base text-white tracking-widest uppercase">
+              Academia<span class="text-tertiary-fixed-dim">X</span>
+</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.14em] text-on-primary-container font-medium">
+              The Imperial Open Archive
+            </span>
+</div>
+</a>
+</div>
+<!-- Central Omnibox Search Bar (YouTube style) -->
+<div class="flex-1 max-w-2xl">
+<form action="index.html" class="flex items-center w-full bg-primary border border-tertiary-fixed-dim/40 rounded-full overflow-hidden focus-within:border-tertiary-fixed transition-colors shadow-inner" method="GET" role="search">
+<div class="pl-4 text-on-primary-container flex items-center">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+<input aria-label="Search Archive" class="w-full bg-transparent px-space-sm py-2 text-white font-sans text-body-md placeholder:text-on-primary-container/70 placeholder:italic focus:outline-none" name="q" placeholder="Search theorem, registry ID (AXI-2026-...), author, or DOI..." type="search"/>
+<button class="bg-primary-container hover:bg-slate-800 text-tertiary-fixed px-space-lg py-2 border-l border-tertiary-fixed-dim/30 font-title-md text-xs uppercase tracking-wider transition-colors flex items-center gap-1" title="Execute Search" type="submit">
+            Search
+          </button>
+</form>
+</div>
+<!-- Global Shell Actions & Profile Badge -->
+<div class="flex items-center gap-space-md justify-end min-w-[280px]">
+<a class="bg-secondary hover:bg-on-secondary-fixed-variant text-white font-title-md text-xs uppercase tracking-wider px-space-md py-2 rounded border border-white/20 transition-all flex items-center gap-1.5 shadow-sm" data-path="submit" href="submit.html">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Deposit Folio (+50 PTS)</span>
+</a>
+<a class="flex items-center gap-space-sm bg-white/5 hover:bg-white/10 border border-tertiary-fixed-dim/30 px-3 py-1.5 rounded-full transition-colors text-decoration-none" data-path="panelist-detail" href="panelist-detail.html" title="Curator Dossier &amp; Rank">
+<div class="w-7 h-7 rounded-full bg-tertiary-container border border-tertiary-fixed-dim text-tertiary-fixed flex items-center justify-center font-display text-xs font-bold">
+            AL
+          </div>
+<div class="flex flex-col text-left leading-none">
+<span class="text-white font-title-md text-xs">A. Laplace</span>
+<span class="text-tertiary-fixed-dim font-mono text-[10px]">Maestro • 350 PTS</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Sub-bar: Global Route Navigation & Subject Quick Filter Rail (48px) -->
+<nav aria-label="Global Navigation and Taxonomy Rail" class="h-12 bg-primary px-gutter flex items-center gap-space-sm overflow-x-auto border-t border-white/10 text-xs font-sans" data-active-classes="border-tertiary-fixed-dim text-white bg-white/15">
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="index" href="index.html">Main Repository</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="subject-hub" href="subject-hub.html">Subject Landing</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="reviewer" href="reviewer.html">Document Reader</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelists" href="panelists.html">Panelist Directory</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelist-detail" href="panelist-detail.html">Panelist Profile</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="submit" href="submit.html">Upload Portal</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="about" href="about.html">Archive Rubric</a>
+</nav>
+</header>
+<!-- APP SHELL WRAPPER (Top padding matches header 112px / 28rem total: pt-28) -->
+<div class="flex-1 flex w-full pt-28">
+<!-- PERSISTENT LEFT SIDEBAR: HAL-INRIA Academic Facet Taxonomy -->
+<aside aria-label="HAL-INRIA Academic Taxonomy Facet Tree" class="w-72 shrink-0 bg-surface-container-low border-r border-outline-variant/40 sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto p-4 flex flex-col gap-5 transition-all duration-200 z-30" id="halSidebar">
+<div class="flex items-center justify-between pb-3 border-b-2 border-primary-container">
+<span class="font-display font-bold text-xs uppercase tracking-wider text-primary-container">Taxonomy Facets</span>
+<a class="text-[11px] font-title-md uppercase text-secondary hover:underline" href="index.html">Reset Filters</a>
+</div>
+<!-- Facet: Discipline / Macro Fields -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Discipline</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Mathematics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">312</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>Physics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">245</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span>Informatics &amp; AI</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">189</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Chemistry &amp; Bio</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">164</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Social Sciences</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">86</span>
+</a>
+</div>
+</div>
+<!-- Facet: Document Type & Weighting -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Document Format</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Self-Written Reviewer</span>
+<span class="font-mono text-[10px] text-secondary font-semibold">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Practice Exam Keys</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+40 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Monographic Folios</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Past Olympiad Proofs</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+30 PTS</span>
+</a>
+</div>
+</div>
+<!-- Facet: Archive Session Year -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Congress Session</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs bg-surface-container font-title-md text-primary-container">
+<span>Session 2026 (Active)</span>
+<span class="font-mono text-[11px]">540</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2025</span>
+<span class="font-mono text-[11px]">480</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2024</span>
+<span class="font-mono text-[11px]">310</span>
+</div>
+</div>
+</div>
+<!-- HAL-INRIA Node Metadata Stamp -->
+<div class="mt-auto p-3 bg-surface-container rounded border border-outline-variant/50 text-[11px] text-on-surface-variant leading-relaxed">
+<div class="font-title-md text-primary-container uppercase tracking-wider mb-1">HAL Open Science Registry</div>
+<div class="font-mono text-[10px]">Node: HAL-INRIA PSHS-MC</div>
+<div class="font-mono text-[10px] text-outline">ARK: ark:/12148/axi.2026</div>
+</div>
+</aside>
+<!-- MAIN CONTENT VIEWPORT -->
+<main class="flex-1 min-w-0 bg-background">
+<div class="flex flex-col w-full">
+<!-- Archival Context Breadcrumb Rail -->
+<div class="bg-surface-container px-margin py-space-sm flex items-center justify-between text-on-surface-variant font-label-code text-label-code">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="text-secondary font-title-md text-body-sm">AXI-NODE: PSHS-MC</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface">Pure Mathematics</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface">Linear Algebra &amp; Operator Theory</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-semibold">AXI-2026-0042</span>
+</div>
+<div class="hidden sm:flex items-center gap-space-md">
+<span class="flex items-center gap-1 bg-surface-container-highest text-on-surface px-2 py-0.5 rounded text-label-code font-label-code">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+        INRIA Peer-Consensus Active
+      </span>
+<span class="text-outline font-label-code text-label-code">Archival Epoch: 2026-IV</span>
+</div>
+</div>
+<!-- Primary Asymmetric Document Examination Canvas -->
+<div class="p-margin grid grid-cols-1 lg:grid-cols-10 gap-space-lg max-w-[1600px] mx-auto w-full">
+<!-- LEFT PANE: 70% Width (Col span 7 of 10) Document Folio Viewport & Apparatus -->
+<div class="lg:col-span-7 flex flex-col gap-space-md min-w-0">
+<!-- Monastic Folio Shell & Viewer Viewport -->
+<div class="bg-primary-container text-on-primary rounded-lg overflow-hidden shadow-xl flex flex-col">
+<!-- Viewer Technical Control Toolbar -->
+<div class="bg-primary px-space-md py-space-xs flex items-center justify-between gap-space-sm flex-wrap text-on-primary">
+<!-- Left Controls: Page Navigation & Jump -->
+<div class="flex items-center gap-space-xs">
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-on-primary transition-colors flex items-center" id="prevPageBtn" title="Preceding Page" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<div class="bg-surface-container-high/15 px-space-sm py-0.5 rounded font-label-code text-label-code text-primary-fixed">
+<span id="currentPageDisplay">Page 04</span> / 28
+            </div>
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-on-primary transition-colors flex items-center" id="nextPageBtn" title="Subsequent Page" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+<!-- Theorem Direct Navigation Selector -->
+<div class="relative ml-space-xs">
+<select aria-label="Jump to Proof / Theorem" class="bg-primary-container text-on-primary font-label-code text-label-code rounded px-space-sm py-1 appearance-none pr-7 hover:bg-surface-container-high/30 focus:outline-none cursor-pointer" id="theoremJump">
+<option value="p1">§ 1. Vector Spaces &amp; Endomorphisms (p.1)</option>
+<option value="p2">§ 2. Invariant Subspaces &amp; Polynomials (p.2)</option>
+<option value="p3">Lemma III.1: Generalized Eigenspaces (p.3)</option>
+<option selected="" value="p4">Theorem IV.2: Jordan Canonical Form (p.4)</option>
+<option value="p5">Cor. IV.3: Minimal vs. Characteristic (p.6)</option>
+<option value="p6">§ 5. Worked Olympiad Problems (p.11)</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none text-[16px] text-tertiary-fixed">unfold_more</span>
+</div>
+</div>
+<!-- Right Controls: Zoom & Scale Controls -->
+<div class="flex items-center gap-space-xs font-label-code text-label-code">
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-tertiary-fixed transition-colors" id="zoomOutBtn" title="Zoom Out" type="button">
+<span class="material-symbols-outlined text-[18px]">zoom_out</span>
+</button>
+<span class="text-tertiary-fixed font-label-code text-label-code px-1 min-w-[48px] text-center" id="zoomPercent">100%</span>
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-tertiary-fixed transition-colors" id="zoomInBtn" title="Zoom In" type="button">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-on-primary transition-colors flex items-center gap-1 ml-space-xs" id="fitWidthBtn" title="Fit to Column Width" type="button">
+<span class="material-symbols-outlined text-[18px]">fit_screen</span>
+<span class="hidden sm:inline text-label-code font-label-code">Fit</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container-high/20 text-on-primary transition-colors" id="fullScreenToggle" title="Solemn Fullscreen Mode" type="button">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Document Sheet Display (Imitation of Heavy Vellum LaTeX Typesetting) -->
+<div class="bg-surface-container-low p-space-md md:p-space-xl overflow-y-auto max-h-[720px] flex justify-center" id="folioCanvas">
+<!-- Inner Paper Folio Leaf -->
+<div class="bg-surface-container-lowest text-on-background shadow-xl w-full max-w-[850px] p-8 md:p-12 rounded flex flex-col gap-space-md transition-transform duration-150 origin-top">
+<!-- Page Header Running Head -->
+<div class="flex items-center justify-between pb-2 text-on-surface-variant font-label-code text-label-code">
+<span class="tracking-widest uppercase">AcademiaX Monographic Series: Pure Math</span>
+<span>Folio IV — Page 4</span>
+</div>
+<!-- Theorem Heading Plate -->
+<div class="bg-surface-container-low p-space-md rounded">
+<div class="flex items-center justify-between mb-1">
+<span class="font-headline-sm text-headline-sm text-primary-container">
+                  Theorem IV.2 (The Generalized Spectral Decomposition &amp; Jordan Normal Form)
+                </span>
+<span class="bg-tertiary-container text-tertiary-fixed px-2 py-0.5 rounded font-label-code text-label-code uppercase tracking-wider">
+                  Core Theorem
+                </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic leading-relaxed">
+                Let <span class="font-label-code text-label-code font-bold">V</span> be a finite-dimensional vector space over an algebraically closed field <span class="font-label-code text-label-code font-bold">K = ℂ</span>, and let <span class="font-label-code text-label-code">T ∈ End(V)</span> have distinct eigenvalues <span class="font-label-code text-label-code">λ₁, λ₂, …, λₖ</span> with characteristic polynomial <span class="font-label-code text-label-code">χ_T(t) = ∏ (t - λᵢ)^{mᵢ}</span>. Then <span class="font-label-code text-label-code">V</span> decomposes uniquely into the direct sum of its generalized eigenspaces:
+              </p>
+</div>
+<!-- Display Mathematical Formula (Jordan Canonical Formula Block) -->
+<div class="bg-surface-container p-space-md rounded text-center flex flex-col items-center justify-center gap-space-xs font-label-code text-body-md overflow-x-auto text-primary-container">
+<div class="font-bold text-title-lg tracking-wider">
+                V = K_{λ₁}(T) ⊕ K_{λ₂}(T) ⊕ ⋯ ⊕ K_{λₖ}(T)
+              </div>
+<div class="text-on-surface-variant text-body-sm font-sans italic">
+                where <span class="font-label-code text-label-code font-bold">K_{λᵢ}(T) = ker((T - λᵢ · I)^{mᵢ}) = ker((T - λᵢ · I)^{dim V})</span>.
+              </div>
+</div>
+<!-- Detailed Proof Demonstration Text Block -->
+<div class="flex flex-col gap-space-sm font-body-md text-body-md text-on-surface leading-relaxed text-justify">
+<div class="font-title-md text-title-md text-secondary uppercase tracking-wider">
+                Demonstration of Canonical Form &amp; Nilpotent Splitting
+              </div>
+<p>
+<strong>Proof.</strong> For each eigenvalue index <span class="font-label-code text-label-code">i ∈ {1, …, k}</span>, let <span class="font-label-code text-label-code">Wᵢ = K_{λᵢ}(T)</span>. By the Primary Decomposition Theorem (applied directly to the minimal polynomial <span class="font-label-code text-label-code">μ_T(x) = ∏ (x - λᵢ)^{rᵢ}</span> where <span class="font-label-code text-label-code">1 ≤ rᵢ ≤ mᵢ</span>), the polynomials <span class="font-label-code text-label-code">qᵢ(x) = μ_T(x) / (x - λᵢ)^{rᵢ}</span> are pairwise coprime. Hence there exist polynomials <span class="font-label-code text-label-code">a₁(x), …, aₖ(x) ∈ K[x]</span> such that:
+              </p>
+<div class="bg-surface-container-high/40 p-space-sm rounded font-label-code text-body-sm text-center">
+                ∑_{i=1}^{k} aᵢ(x) · qᵢ(x) = 1
+              </div>
+<p>
+                Evaluating this identity at operator <span class="font-label-code text-label-code">T</span> yields projections <span class="font-label-code text-label-code">Pᵢ = aᵢ(T)qᵢ(T)</span> satisfying <span class="font-label-code text-label-code">P₁ + ⋯ + Pₖ = id_V</span> and <span class="font-label-code text-label-code">Pᵢ Pⱼ = δ_{ij} Pᵢ</span>. Consequently, each subspace <span class="font-label-code text-label-code">Wᵢ = im(Pᵢ)</span> is invariant under <span class="font-label-code text-label-code">T</span>. We may express the restriction as:
+              </p>
+<div class="bg-surface-container p-space-sm rounded font-label-code text-body-sm text-primary-container flex items-center justify-around flex-wrap gap-2">
+<span>T|_{Wᵢ} = λᵢ · I_{Wᵢ} + Nᵢ</span>
+<span class="text-on-surface-variant font-sans text-body-sm">where</span>
+<span class="text-secondary font-bold">Nᵢ^{rᵢ} = 0</span>
+</div>
+<p>
+                Since <span class="font-label-code text-label-code">Nᵢ</span> is a nilpotent linear operator on <span class="font-label-code text-label-code">Wᵢ</span>, there exists a cyclic basis of generalized eigenvectors transforming the block matrix representation into direct sums of elementary Jordan blocks <span class="font-label-code text-label-code">J_d(λᵢ)</span>:
+              </p>
+</div>
+<!-- Stylized Matrix Notation Layout -->
+<div class="bg-surface-container-low p-space-md rounded flex items-center justify-center font-label-code text-body-sm text-primary-container overflow-x-auto">
+<div class="flex items-center gap-space-md">
+<span class="text-title-lg font-bold">J(T) = </span>
+<div class="bg-surface-container-lowest p- space-sm px-space-md rounded shadow-sm flex items-center gap-3">
+<div class="flex flex-col text-right text-label-code">
+<span>[ λ₁</span>
+<span>[ 0</span>
+<span>[ 0</span>
+<span>[ ⋮</span>
+</div>
+<div class="flex flex-col text-center text-label-code text-secondary font-bold">
+<span>1</span>
+<span>λ₁</span>
+<span>0</span>
+<span>0</span>
+</div>
+<div class="flex flex-col text-center text-label-code text-on-surface-variant">
+<span>0</span>
+<span>1</span>
+<span>⋱</span>
+<span>0</span>
+</div>
+<div class="flex flex-col text-left text-label-code">
+<span>⋯ 0 ]</span>
+<span>⋯ 0 ]</span>
+<span>⋯ 1 ]</span>
+<span>⋯ λₖ ]</span>
+</div>
+</div>
+<div class="font-sans text-body-sm text-on-surface-variant max-w-[200px]">
+                  Diagonal contains spectral eigenvalues; superdiagonal constitutes unit nilpotent couplings.
+                </div>
+</div>
+</div>
+<!-- Page Leaf Footer / Tombstone Proof Mark -->
+<div class="flex items-center justify-between pt-space-sm text-on-surface-variant font-label-code text-label-code">
+<span>AXI Archive Ref: LEM-IV-JCF-PROOF</span>
+<span class="text-secondary font-bold text-title-lg">∎ Q.E.D.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Action Bar Beneath Viewer -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<!-- Header Row: Title and Senate Stamp -->
+<div class="flex items-start justify-between gap-space-md flex-wrap">
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="bg-secondary text-on-secondary px-2 py-0.5 rounded font-label-badge text-label-badge uppercase tracking-wider">
+                Peer Validated
+              </span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-label-badge text-label-badge uppercase tracking-wider">
+                Maestro Monograph
+              </span>
+<span class="text-outline font-label-code text-label-code">ARK: ark:/67375/axi-0042</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary-container leading-tight mt-1">
+              Spectral Operator Decomposition &amp; Nilpotent Jordan Normal Form
+            </h1>
+</div>
+<!-- Imperial Senate Seal Badge -->
+<div class="bg-surface-container px-space-md py-space-xs rounded flex items-center gap-space-xs text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-[24px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md uppercase tracking-wide leading-none">Senate Seal</span>
+<span class="font-label-code text-[10px] text-on-surface-variant">HAL Archival Act 2026-B</span>
+</div>
+</div>
+</div>
+<!-- Author Card & Interaction Metrics Bar -->
+<div class="flex items-center justify-between gap-space-md flex-wrap pt-space-xs">
+<!-- Author Dossier Thumbnail -->
+<a class="flex items-center gap-space-sm text-decoration-none group" href="panelist-detail.html">
+<div class="w-10 h-10 rounded-full bg-primary-container text-tertiary-fixed flex items-center justify-center font-display font-bold text-title-md">
+              AL
+            </div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary-container group-hover:text-secondary transition-colors">
+                Augustin-Louis Laplace
+              </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+                Maestro Writer • Chair of Applied Analysis • <strong class="text-secondary">350 PTS</strong>
+</span>
+</div>
+</a>
+<!-- Download Buttons, Vote consensus, TeX Source Link -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<!-- Peer Consensus Metric Button -->
+<button class="bg-surface-container hover:bg-surface-container-high text-primary-container font-title-md text-body-sm px-space-sm py-2 rounded flex items-center gap-1.5 transition-colors" id="voteBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">thumb_up</span>
+<span id="voteCount">98% (42 votes)</span>
+</button>
+<!-- Download PDF Action -->
+<a class="bg-primary-container hover:bg-secondary text-on-primary font-title-md text-body-sm px-space-md py-2 rounded transition-colors flex items-center gap-1.5 shadow-sm" download="axi-0042-jordan-spectral.pdf" href="#">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PDF (3.4 MB)</span>
+</a>
+<!-- TeX Source Package -->
+<a class="bg-surface-container text-on-surface hover:bg-surface-container-high font-title-md text-body-sm px-space-sm py-2 rounded transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">code</span>
+<span>TeX Source</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Collapsible Academic Abstract & Pedagogical Competencies -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<button class="w-full px-space-md py-space-sm bg-surface-container-low hover:bg-surface-container flex items-center justify-between text-left transition-colors" id="abstractAccordionToggle" type="button">
+<span class="font-title-md text-title-md text-primary-container uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-secondary">menu_book</span>
+            Document Abstract &amp; Pedagogical Competency Matrix
+          </span>
+<span class="material-symbols-outlined text-[20px] text-primary-container transition-transform" id="abstractAccordionIcon">
+            expand_less
+          </span>
+</button>
+<div class="p-space-md flex flex-col gap-space-md" id="abstractAccordionBody">
+<div class="font-body-md text-body-md text-on-surface leading-relaxed">
+<p>
+              This monograph provides a rigorous self-contained derivation of the Jordan Canonical Form without resorting to the theory of modules over principal ideal domains. Utilizing purely spectral projections and nilpotency indices, the exposition establishes generalized eigenspace decomposition for complex finite-dimensional endomorphisms. Complete with detailed algebraic diagrams, five fully solved Olympiad-level matrix characterization lemmas, and historical notes reflecting Cauchy-Laplace operator correspondence.
+            </p>
+</div>
+<!-- Pedagogical Competencies Badges -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-code text-label-code text-outline uppercase tracking-wider">
+              Assessed Curricular Competencies:
+            </span>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm font-sans text-on-surface">
+<strong>COMP-MATH-01:</strong> Spectral Invariant Decompositions
+              </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm font-sans text-on-surface">
+<strong>COMP-MATH-04:</strong> Jordan Block Nilpotent Calculation
+              </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm font-sans text-on-surface">
+<strong>COMP-PEDAGOGY:</strong> High-School Olympiad to University Bridging
+              </span>
+<span class="bg-surface-container px-2.5 py-1 rounded text-body-sm font-sans text-on-surface">
+<strong>COMP-TEX:</strong> Imprimerie Royale Typographical Conventions
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANE: 30% Width (Col span 3 of 10) Registry Apparatus & Juror Verdicts -->
+<div class="lg:col-span-3 flex flex-col gap-space-md min-w-0">
+<!-- Institutional Metadata & Citation Exporter Box -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<span class="font-display font-bold text-headline-sm text-primary-container">
+            Archive Registry
+          </span>
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim">inventory_2</span>
+</div>
+<!-- Monospaced Identifier Dossier -->
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col gap-space-xs font-label-code text-label-code">
+<div class="flex flex-col">
+<span class="text-outline uppercase text-[10px]">Persistent Archival Resource (ARK)</span>
+<span class="text-secondary font-bold select-all">ark:/67375/axi-0042</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="text-outline uppercase text-[10px]">Zenodo Research DOI</span>
+<span class="text-on-surface select-all">10.5281/zenodo.10842911</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="text-outline uppercase text-[10px]">Deposit License</span>
+<span class="text-on-surface">Creative Commons CC-BY-NC-SA 4.0</span>
+</div>
+<div class="flex flex-col pt-1">
+<span class="text-outline uppercase text-[10px]">Language &amp; Dialect</span>
+<span class="text-on-surface">English (Mathematical LaTeX 2ε)</span>
+</div>
+</div>
+<!-- Citation Exporters with Interactive Feedback -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface">Bibliographic Export</span>
+<span class="text-secondary font-label-code text-label-code opacity-0 transition-opacity" id="copyFeedback">Copied!</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="bg-surface-container hover:bg-surface-container-high text-primary-container font-title-md text-body-sm py-2 px-space-xs rounded flex items-center justify-center gap-1 transition-colors" id="copyBibtexBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copy BibTeX</span>
+</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary-container font-title-md text-body-sm py-2 px-space-xs rounded flex items-center justify-center gap-1 transition-colors" id="copyDoiBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<span>Copy DOI URL</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Panelist Multi-Dimensional Rating Breakdown -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<span class="font-display font-bold text-headline-sm text-primary-container">
+            Juror Consensus
+          </span>
+<span class="bg-surface-container text-secondary font-label-code text-label-code px-2 py-0.5 rounded font-bold">
+            Grade: A+
+          </span>
+</div>
+<!-- Rating Dimension Progress Bars -->
+<div class="flex flex-col gap-space-sm">
+<!-- Pedagogical Clarity -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface">
+<span>Pedagogical Clarity</span>
+<span class="font-label-code font-bold text-secondary">4.9 / 5.0</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 98%;"></div>
+</div>
+</div>
+<!-- Mathematical Rigor -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface">
+<span>Mathematical Rigor</span>
+<span class="font-label-code font-bold text-primary-container">5.0 / 5.0</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<!-- LaTeX & Typographical Precision -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface">
+<span>LaTeX &amp; Typographical Precision</span>
+<span class="font-label-code font-bold text-tertiary-container">4.8 / 5.0</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-fixed-dim h-full rounded-full" style="width: 96%;"></div>
+</div>
+</div>
+</div>
+<!-- Juror Quorum Confirmation Status -->
+<div class="bg-surface-container-low p-space-sm rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-label-code text-label-code">
+<span class="text-on-surface-variant uppercase">Senate Quorum Met</span>
+<span class="text-secondary font-bold">3 / 4 Presiding Jurors</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 75%;"></div>
+</div>
+<div class="flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>94% Electoral Consensus Achieved.</span>
+</div>
+</div>
+</div>
+<!-- Up Next / Related Reviewers Stack -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<span class="font-display font-bold text-headline-sm text-primary-container">
+            Related Folios
+          </span>
+<a class="font-label-code text-label-code text-secondary hover:underline" href="subject-hub.html">
+            View All (14)
+          </a>
+</div>
+<!-- Stack List of Companion Reviewers -->
+<div class="flex flex-col gap-space-sm">
+<!-- Companion Card 1 -->
+<a class="p-space-sm bg-surface-container-low hover:bg-surface-container rounded transition-colors text-decoration-none group flex flex-col gap-1" href="reviewer.html">
+<div class="flex items-center justify-between font-label-code text-[11px]">
+<span class="text-secondary font-semibold">PREREQUISITE</span>
+<span class="text-outline">AXI-2026-0038</span>
+</div>
+<div class="font-title-md text-title-md text-primary-container group-hover:text-secondary transition-colors">
+              Quotient Spaces &amp; Dual Operators in Endomorphism Theory
+            </div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant font-label-code">
+<span>Dr. E. Galois</span>
+<span class="text-tertiary-container font-semibold">+40 PTS</span>
+</div>
+</a>
+<!-- Companion Card 2 -->
+<a class="p-space-sm bg-surface-container-low hover:bg-surface-container rounded transition-colors text-decoration-none group flex flex-col gap-1" href="reviewer.html">
+<div class="flex items-center justify-between font-label-code text-[11px]">
+<span class="text-tertiary-fixed-dim font-semibold">PROBLEM SET</span>
+<span class="text-outline">AXI-2026-0049</span>
+</div>
+<div class="font-title-md text-title-md text-primary-container group-hover:text-secondary transition-colors">
+              50 Olympiad Examination Proofs on Invariant Subspaces
+            </div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant font-label-code">
+<span>H. Poincaré</span>
+<span class="text-tertiary-container font-semibold">+50 PTS</span>
+</div>
+</a>
+<!-- Companion Card 3 -->
+<a class="p-space-sm bg-surface-container-low hover:bg-surface-container rounded transition-colors text-decoration-none group flex flex-col gap-1" href="reviewer.html">
+<div class="flex items-center justify-between font-label-code text-[11px]">
+<span class="text-outline font-semibold">SEQUEL</span>
+<span class="text-outline">AXI-2026-0058</span>
+</div>
+<div class="font-title-md text-title-md text-primary-container group-hover:text-secondary transition-colors">
+              Perron-Frobenius Theory for Non-Negative Operator Matrices
+            </div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant font-label-code">
+<span>A. Markov</span>
+<span class="text-tertiary-container font-semibold">+35 PTS</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Document Viewer & Citation Micro-Engine -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Pagination Simulator
+      let currentPage = 4;
+      const totalPages = 28;
+      const pageDisplay = document.getElementById('currentPageDisplay');
+      const prevBtn = document.getElementById('prevPageBtn');
+      const nextBtn = document.getElementById('nextPageBtn');
+
+      function updatePage(newPage) {
+        if (newPage >= 1 && newPage <= totalPages) {
+          currentPage = newPage;
+          pageDisplay.textContent = 'Page ' + (currentPage < 10 ? '0' + currentPage : currentPage);
+        }
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => updatePage(currentPage - 1));
+        nextBtn.addEventListener('click', () => updatePage(currentPage + 1));
+      }
+
+      // 2. Theorem Dropdown Navigation
+      const theoremSelect = document.getElementById('theoremJump');
+      if (theoremSelect) {
+        theoremSelect.addEventListener('change', (e) => {
+          const mapping = { p1: 1, p2: 2, p3: 3, p4: 4, p5: 6, p6: 11 };
+          if (mapping[e.target.value]) {
+            updatePage(mapping[e.target.value]);
+          }
+        });
+      }
+
+      // 3. Zoom Factor Scale Controller
+      let currentZoom = 100;
+      const zoomText = document.getElementById('zoomPercent');
+      const zoomIn = document.getElementById('zoomInBtn');
+      const zoomOut = document.getElementById('zoomOutBtn');
+      const fitWidth = document.getElementById('fitWidthBtn');
+      const folioSheet = document.querySelector('#folioCanvas > div');
+
+      function applyZoom(val) {
+        currentZoom = Math.min(Math.max(val, 60), 160);
+        if (zoomText) zoomText.textContent = currentZoom + '%';
+        if (folioSheet) folioSheet.style.transform = 'scale(' + (currentZoom / 100) + ')';
+      }
+
+      if (zoomIn) zoomIn.addEventListener('click', () => applyZoom(currentZoom + 10));
+      if (zoomOut) zoomOut.addEventListener('click', () => applyZoom(currentZoom - 10));
+      if (fitWidth) fitWidth.addEventListener('click', () => applyZoom(100));
+
+      // 4. Abstract Accordion Expansion/Collapse
+      const accordionBtn = document.getElementById('abstractAccordionToggle');
+      const accordionBody = document.getElementById('abstractAccordionBody');
+      const accordionIcon = document.getElementById('abstractAccordionIcon');
+
+      if (accordionBtn && accordionBody && accordionIcon) {
+        accordionBtn.addEventListener('click', () => {
+          accordionBody.classList.toggle('hidden');
+          accordionIcon.textContent = accordionBody.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+        });
+      }
+
+      // 5. Consensus Upvoting Interactivity
+      const voteBtn = document.getElementById('voteBtn');
+      const voteDisplay = document.getElementById('voteCount');
+      let hasVoted = false;
+
+      if (voteBtn && voteDisplay) {
+        voteBtn.addEventListener('click', () => {
+          if (!hasVoted) {
+            voteDisplay.textContent = '99% (43 votes)';
+            voteBtn.classList.add('bg-secondary', 'text-on-secondary');
+            hasVoted = true;
+          } else {
+            voteDisplay.textContent = '98% (42 votes)';
+            voteBtn.classList.remove('bg-secondary', 'text-on-secondary');
+            hasVoted = false;
+          }
+        });
+      }
+
+      // 6. Clipboard BibTeX Exporter Feedback
+      const bibtexBtn = document.getElementById('copyBibtexBtn');
+      const doiBtn = document.getElementById('copyDoiBtn');
+      const feedback = document.getElementById('copyFeedback');
+
+      function showFeedback(text) {
+        if (!feedback) return;
+        feedback.textContent = text;
+        feedback.classList.remove('opacity-0');
+        setTimeout(() => feedback.classList.add('opacity-0'), 2200);
+      }
+
+      if (bibtexBtn) {
+        bibtexBtn.addEventListener('click', () => {
+          const bibSnippet = `@article{laplace2026jordan,
+  title={Spectral Operator Decomposition and Jordan Normal Form},
+  author={Laplace, Augustin-Louis},
+  journal={Imperial Open Archive AcademiaX},
+  volume={IV},
+  pages={1--28},
+  year={2026},
+  publisher={HAL-INRIA PSHS-MC Node}
+}`;
+          navigator.clipboard.writeText(bibSnippet).then(() => {
+            showFeedback('BibTeX Copied!');
+          }).catch(() => {
+            showFeedback('Copied to Clipboard!');
+          });
+        });
+      }
+
+      if (doiBtn) {
+        doiBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('https://doi.org/10.5281/zenodo.10842911').then(() => {
+            showFeedback('DOI Copied!');
+          });
+        });
+      }
+
+      // 7. Fullscreen Toggle Simulation
+      const fullScreenBtn = document.getElementById('fullScreenToggle');
+      const folioContainer = document.getElementById('folioCanvas');
+      if (fullScreenBtn && folioContainer) {
+        fullScreenBtn.addEventListener('click', () => {
+          if (!document.fullscreenElement) {
+            folioContainer.requestFullscreen().catch(() => {});
+          } else {
+            document.exitFullscreen().catch(() => {});
+          }
+        });
+      }
+    });
+  </script>
+</div>
+</main>
+</div>
+<!-- VANILLA INTERACTIVITY: Mobile/Desktop Sidebar Toggle & Active Route Detection -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('halSidebarToggle');
+      const sidebar = document.getElementById('halSidebar');
+      
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+
+      // Dynamic active state highlight based on current pathname
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const cleanCurrent = currentPath.replace('.html', '');
+      const navLinks = document.querySelectorAll('header nav a[data-path]');
+      const activeClasses = (document.querySelector('header nav')?.getAttribute('data-active-classes') || 'text-white border-tertiary-fixed-dim bg-white/15').split(' ');
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('data-path');
+        if (linkPath === cleanCurrent || (cleanCurrent === '' && linkPath === 'index')) {
+          link.classList.add(...activeClasses);
+        }
+      });
+    });
+  </script>
+</body></html>

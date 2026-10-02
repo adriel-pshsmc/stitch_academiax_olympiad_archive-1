@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AcademiaX: Imperial Open Archive</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#171c1f",
+            "tertiary-container": "#291c00",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e4e9ed",
+            "secondary-fixed": "#ffdadb",
+            "on-secondary-fixed-variant": "#920029",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "tertiary": "#080400",
+            "on-primary-container": "#7786a5",
+            "secondary-fixed-dim": "#ffb2b7",
+            "tertiary-fixed": "#ffdf9c",
+            "primary-container": "#0e1e38",
+            "secondary": "#b80938",
+            "outline": "#75777e",
+            "background": "#f6fafe",
+            "surface-dim": "#d6dade",
+            "tertiary-fixed-dim": "#f0c04f",
+            "surface": "#f6fafe",
+            "surface-container-low": "#f0f4f8",
+            "on-tertiary-fixed": "#251a00",
+            "error-container": "#ffdad6",
+            "secondary-container": "#db2e4e",
+            "on-primary-fixed": "#0b1b35",
+            "surface-container": "#eaeef2",
+            "primary": "#000513",
+            "inverse-surface": "#2c3134",
+            "surface-variant": "#dfe3e7",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#384763",
+            "on-tertiary-fixed-variant": "#5b4300",
+            "on-tertiary-container": "#a8800b",
+            "on-surface-variant": "#44474d",
+            "inverse-on-surface": "#edf1f5",
+            "on-surface": "#171c1f",
+            "primary-fixed-dim": "#b8c7e9",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f6fafe",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#dfe3e7",
+            "surface-tint": "#505f7c",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#40000d",
+            "outline-variant": "#c5c6ce",
+            "primary-fixed": "#d7e2ff",
+            "on-error": "#ffffff",
+            "inverse-primary": "#b8c7e9"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            gutter: "1.5rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            margin: "2rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          fontFamily: {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Playfair Display"],
+            "label-code": ["JetBrains Mono"],
+            "body-sm": ["Inter"],
+            "title-lg": ["Inter"],
+            "headline-md": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "label-badge": ["Inter"],
+            "headline-lg-mobile": ["Playfair Display"],
+            display: ["Cinzel", "serif"],
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "title-md": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+            "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+            "label-code": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }],
+            "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+            "title-lg": ["16px", { lineHeight: "22px", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+            "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "label-badge": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }],
+            "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html {
+        color: #171c1f;
+        background-color: #f6fafe;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="bg-background text-on-background font-sans min-h-screen antialiased flex flex-col">
+<!-- FIXED TOPBAR (YouTube-style fixed header, height 112px / 28rem total: primary 64px + subrail 48px) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary-container border-b-2 border-tertiary-fixed-dim shadow-md">
+<!-- Primary Bar (64px) -->
+<div class="h-16 px-gutter flex items-center justify-between gap-space-lg">
+<!-- Brand Cluster & Sidebar Trigger -->
+<div class="flex items-center gap-space-md min-w-[260px]">
+<button aria-label="Toggle Academic Facet Sidebar" class="w-10 h-10 rounded flex items-center justify-center text-tertiary-fixed hover:bg-white/10 transition-colors" id="halSidebarToggle" title="Toggle Academic Taxonomy Facets" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<a class="flex items-center gap-space-sm group text-decoration-none" data-path="index" href="index.html">
+<div class="w-9 h-9 rounded-full bg-primary border border-tertiary-fixed-dim flex items-center justify-center text-tertiary-fixed font-display font-bold text-sm tracking-widest">
+            AX
+          </div>
+<div class="flex flex-col leading-tight">
+<span class="font-display font-bold text-base text-white tracking-widest uppercase">
+              Academia<span class="text-tertiary-fixed-dim">X</span>
+</span>
+<span class="font-sans text-[10px] uppercase tracking-[0.14em] text-on-primary-container font-medium">
+              The Imperial Open Archive
+            </span>
+</div>
+</a>
+</div>
+<!-- Central Omnibox Search Bar (YouTube style) -->
+<div class="flex-1 max-w-2xl">
+<form action="index.html" class="flex items-center w-full bg-primary border border-tertiary-fixed-dim/40 rounded-full overflow-hidden focus-within:border-tertiary-fixed transition-colors shadow-inner" method="GET" role="search">
+<div class="pl-4 text-on-primary-container flex items-center">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+<input aria-label="Search Archive" class="w-full bg-transparent px-space-sm py-2 text-white font-sans text-body-md placeholder:text-on-primary-container/70 placeholder:italic focus:outline-none" name="q" placeholder="Search theorem, registry ID (AXI-2026-...), author, or DOI..." type="search"/>
+<button class="bg-primary-container hover:bg-slate-800 text-tertiary-fixed px-space-lg py-2 border-l border-tertiary-fixed-dim/30 font-title-md text-xs uppercase tracking-wider transition-colors flex items-center gap-1" title="Execute Search" type="submit">
+            Search
+          </button>
+</form>
+</div>
+<!-- Global Shell Actions & Profile Badge -->
+<div class="flex items-center gap-space-md justify-end min-w-[280px]">
+<a class="bg-secondary hover:bg-on-secondary-fixed-variant text-white font-title-md text-xs uppercase tracking-wider px-space-md py-2 rounded border border-white/20 transition-all flex items-center gap-1.5 shadow-sm" data-path="submit" href="submit.html">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Deposit Folio (+50 PTS)</span>
+</a>
+<a class="flex items-center gap-space-sm bg-white/5 hover:bg-white/10 border border-tertiary-fixed-dim/30 px-3 py-1.5 rounded-full transition-colors text-decoration-none" data-path="panelist-detail" href="panelist-detail.html" title="Curator Dossier &amp; Rank">
+<div class="w-7 h-7 rounded-full bg-tertiary-container border border-tertiary-fixed-dim text-tertiary-fixed flex items-center justify-center font-display text-xs font-bold">
+            AL
+          </div>
+<div class="flex flex-col text-left leading-none">
+<span class="text-white font-title-md text-xs">A. Laplace</span>
+<span class="text-tertiary-fixed-dim font-mono text-[10px]">Maestro • 350 PTS</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Sub-bar: Global Route Navigation & Subject Quick Filter Rail (48px) -->
+<nav aria-label="Global Navigation and Taxonomy Rail" class="h-12 bg-primary px-gutter flex items-center gap-space-sm overflow-x-auto border-t border-white/10 text-xs font-sans" data-active-classes="border-tertiary-fixed-dim text-white bg-white/15">
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="index" href="index.html">Main Repository</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="subject-hub" href="subject-hub.html">Subject Landing</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="reviewer" href="reviewer.html">Document Reader</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelists" href="panelists.html">Panelist Directory</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="panelist-detail" href="panelist-detail.html">Panelist Profile</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="submit" href="submit.html">Upload Portal</a>
+<a class="px-3 py-1.5 rounded-full border border-white/15 text-slate-300 hover:text-white hover:border-tertiary-fixed-dim transition-colors whitespace-nowrap" data-path="about" href="about.html">Archive Rubric</a>
+</nav>
+</header>
+<!-- APP SHELL WRAPPER (Top padding matches header 112px / 28rem total: pt-28) -->
+<div class="flex-1 flex w-full pt-28">
+<!-- PERSISTENT LEFT SIDEBAR: HAL-INRIA Academic Facet Taxonomy -->
+<aside aria-label="HAL-INRIA Academic Taxonomy Facet Tree" class="w-72 shrink-0 bg-surface-container-low border-r border-outline-variant/40 sticky top-28 h-[calc(100vh-7rem)] overflow-y-auto p-4 flex flex-col gap-5 transition-all duration-200 z-30" id="halSidebar">
+<div class="flex items-center justify-between pb-3 border-b-2 border-primary-container">
+<span class="font-display font-bold text-xs uppercase tracking-wider text-primary-container">Taxonomy Facets</span>
+<a class="text-[11px] font-title-md uppercase text-secondary hover:underline" href="index.html">Reset Filters</a>
+</div>
+<!-- Facet: Discipline / Macro Fields -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Discipline</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>Mathematics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">312</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>Physics</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">245</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim"></span>
+<span>Informatics &amp; AI</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">189</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Chemistry &amp; Bio</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">164</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none group" href="subject-hub.html">
+<span class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span>Social Sciences</span>
+</span>
+<span class="font-mono text-[11px] text-on-surface-variant group-hover:text-primary-container font-semibold">86</span>
+</a>
+</div>
+</div>
+<!-- Facet: Document Type & Weighting -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Document Format</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Self-Written Reviewer</span>
+<span class="font-mono text-[10px] text-secondary font-semibold">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Practice Exam Keys</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+40 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Monographic Folios</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+50 PTS</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface hover:bg-surface-container font-sans text-decoration-none" href="reviewer.html">
+<span>Past Olympiad Proofs</span>
+<span class="font-mono text-[10px] text-on-surface-variant font-medium">+30 PTS</span>
+</a>
+</div>
+</div>
+<!-- Facet: Archive Session Year -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-title-md uppercase tracking-wider text-on-surface-variant">
+<span>Congress Session</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs bg-surface-container font-title-md text-primary-container">
+<span>Session 2026 (Active)</span>
+<span class="font-mono text-[11px]">540</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2025</span>
+<span class="font-mono text-[11px]">480</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-on-surface-variant hover:bg-surface-container font-sans">
+<span>Session 2024</span>
+<span class="font-mono text-[11px]">310</span>
+</div>
+</div>
+</div>
+<!-- HAL-INRIA Node Metadata Stamp -->
+<div class="mt-auto p-3 bg-surface-container rounded border border-outline-variant/50 text-[11px] text-on-surface-variant leading-relaxed">
+<div class="font-title-md text-primary-container uppercase tracking-wider mb-1">HAL Open Science Registry</div>
+<div class="font-mono text-[10px]">Node: HAL-INRIA PSHS-MC</div>
+<div class="font-mono text-[10px] text-outline">ARK: ark:/12148/axi.2026</div>
+</div>
+</aside>
+<!-- MAIN CONTENT VIEWPORT -->
+<main class="flex-1 min-w-0 bg-background">
+<div class="flex flex-col w-full">
+<!-- SOLEMN MASTHEAD / JURISPRUDENCE BOARD HEADER -->
+<section class="bg-primary text-on-primary px-margin py-space-xl relative overflow-hidden shadow-md">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/3 bottom-0 w-80 h-32 bg-tertiary-fixed/5 blur-2xl pointer-events-none"></div>
+<div class="max-w-6xl mx-auto flex flex-col gap-space-lg relative z-10">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm bg-tertiary-container text-tertiary-fixed px-3 py-1 rounded text-label-badge font-mono tracking-widest uppercase">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span>Archival Session 2026 • Curatorial Senate</span>
+</div>
+<div class="flex items-center gap-space-sm text-body-sm text-on-primary-container font-mono">
+<span class="material-symbols-outlined text-sm text-tertiary-fixed-dim">verified_user</span>
+<span>Decree No. VIII / Inria-PSHS-MC Jurisprudence</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 max-w-4xl">
+<h1 class="font-headline-lg text-headline-lg text-white tracking-tight">
+          Senate Panel Committee Directory &amp; Jurisprudence Board
+        </h1>
+<p class="font-body-lg text-body-lg text-on-primary-container max-w-3xl font-light">
+          The supreme peer adjudicators of the Imperial Open Archive. Tasked with certifying mathematical rigor, experimental replicability, and awarding imperial endowment points across all academic folios.
+        </p>
+</div>
+<!-- ACTIVE CYCLE VITAL METRICS BAR -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md mt-space-sm pt-space-md border-t border-white/10">
+<div class="flex flex-col p-space-md rounded bg-primary-container/80 shadow-sm">
+<span class="text-label-badge font-title-md uppercase tracking-wider text-on-primary-container">Accredited Jurors</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-white font-serif">42</span>
+<span class="font-mono text-body-sm text-tertiary-fixed-dim">Active</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary-container/80 mt-1">Across 6 Collegia</span>
+</div>
+<div class="flex flex-col p-space-md rounded bg-primary-container/80 shadow-sm">
+<span class="text-label-badge font-title-md uppercase tracking-wider text-on-primary-container">Velocity Index</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-white font-serif">2.8</span>
+<span class="font-mono text-body-sm text-tertiary-fixed">Days / Peer Rev</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary-container/80 mt-1">Median adjudication time</span>
+</div>
+<div class="flex flex-col p-space-md rounded bg-primary-container/80 shadow-sm">
+<span class="text-label-badge font-title-md uppercase tracking-wider text-on-primary-container">Eagle Grant Rate</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-white font-serif">78.4%</span>
+<span class="font-mono text-body-sm text-secondary-fixed-dim">Accredited</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary-container/80 mt-1">Pass rate upon final review</span>
+</div>
+<div class="flex flex-col p-space-md rounded bg-primary-container/80 shadow-sm">
+<span class="text-label-badge font-title-md uppercase tracking-wider text-on-primary-container">Disbursed Endowment</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-white font-serif">142,500</span>
+<span class="font-mono text-body-sm text-tertiary-fixed-dim">PTS</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-primary-container/80 mt-1">Granted to scholar authors</span>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTENT VIEWPORT -->
+<div class="max-w-6xl mx-auto w-full px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- CONTROLS & DISCIPLINARY FILTER TABS -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-sm border-b border-surface-container-highest">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-primary-container">Chairs of Primary Assessment</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Permanent members of the Philippine Science High School Main Campus curatorial syndicate.</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container p-1 rounded">
+<button class="px-3 py-1 rounded text-body-sm font-title-md bg-surface-container-lowest text-primary-container shadow-sm" type="button">All Chairs (6)</button>
+<button class="px-3 py-1 rounded text-body-sm font-title-md text-on-surface-variant hover:text-primary-container" type="button">Pure Sciences</button>
+<button class="px-3 py-1 rounded text-body-sm font-title-md text-on-surface-variant hover:text-primary-container" type="button">Informatics</button>
+</div>
+</div>
+<!-- FACULTY / PANELIST GRID (6 ADJUDICATORS) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- PANELIST 1: DR. AUGUSTIN-LOUIS LAPLACE -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Classical dignified scholar portrait of Dr Augustin-Louis Laplace in an austere academic library surrounded by mathematical scrolls, architectural blueprints, warm cinematic candlelight, deep navy and burnished gold tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwxqlCCPh5KmMzHhG4uVk4Qs9kofz45rumJu-WnAkFEtUdni4UT-FK7Fy-qEDishgpfvUIKQmL5in7KxSMbMi5a0QkLYftvRKLtct9K1zppS-vO5uTJLAhDJHIJSHiHsabLZfi8_qY9uQhUExt5ynI_47m_NRoT88tkyR8H11Jqsu5iXykY53PBppGFX9kyDuFMnmrNWFYfOTTwSmcdCSTnIpfRYGTf9VbCm4Rhw9cJGDk4bVC8Uy8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-tertiary-container/90 text-tertiary-fixed px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Vanguard Tier
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Dr. Augustin-Louis Laplace</span>
+<span class="font-body-sm text-body-sm text-tertiary-fixed-dim">MTP Math Collegium Chair</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">MATH.CA • Calculus</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Vetted Works</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">42 Folios</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">99.8%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Oversees analytical geometry, differential manifolds, and national Olympiad selection papers. Holds highest peer adjudication record for Session 2026.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/laplace</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- PANELIST 2: DR. HENRI POINCARÉ -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Intense contemplative portrait of Dr Henri Poincare studying celestial mechanics equations on a slate blackboard, soft dust motes, scholarly atmosphere, rich crimson and slate blue palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYQdOLNhy1ypxsQkYM1SaCES_IrAGq-zrGoUWvroWwSarECpK9-SCmuKxt3r-TlAG2sGzfjdQynGCzMeZV6u5C5znpmNYBEv81SYQOoy371ykrmZm965mPeqNZ-TS7xZHnRnmxLmF4j8h-J1VD1RRw8QUET_bUDRBtJbZTJxH4tVMp1u0ZrIosDuErKCUe2MOSFywmYtrS5PrfMk06Y5q4wxQG-6q1E1WRIzyo4MsdN_rvDH1HgWrY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-secondary text-white px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Rector Tier
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Dr. Henri Poincaré</span>
+<span class="font-body-sm text-body-sm text-secondary-fixed">Physics &amp; TrOPhy Lead</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">PHYS.TH • Chaos &amp; Dyn</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Vetted Works</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">29 Folios</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">98.4%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Principal examiner for the Tri-Olympiad Physics Congress (TrOPhy). Directs reviews on non-linear systems and invariant manifold computations.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/poincare</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- PANELIST 3: ÉMILIE DU CHÂTELET -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Refined scholarly portrait of Emilie du Chatelet analyzing illuminated physics folios with an astrolabe and brass measurement instruments on a mahogany writing table, imperial golden lighting, formal academic regalia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCLDrlSPUd8d0HoSbWthGGVDiYQgrGJDOi67nblx-uXgf-d0jn51-soYO8lUMs48S0TqK6XEN46KwUTa-V3hd41dXY4TAJuuVWrQNsXhTeCzOXCEXqWjqA3FoD3uTJj4Sd-RHEpGogioPSEQndYEdASikvHfyYvfcykeKINYT81a-hOAyLPDncmPG_H87OgFOZP16NjHkCpHFxBqVajxtxin7rFHu2nbc8Z2KEhgva67RkZbEd0bqU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Maestro Tier
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Émilie du Châtelet</span>
+<span class="font-body-sm text-body-sm text-tertiary-fixed">Calculus &amp; AI Chair</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">CS.LG • Kinetic Models</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Vetted Works</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">38 Folios</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">99.2%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Spearheads algorithmic proofs connecting Newtonian kinetic conservation laws to modern gradient descent convergence criteria.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/chatelet</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- PANELIST 4: GASPARD MONGE -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Eminent historic portrait of Gaspard Monge examining isometric projections and geometric schematics, dramatic chiaroscuro lighting, deep navy background with drafting parchment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxLoI_44Nf8TuIagQzbWJyVjxfpON-Ko1gLdfY0eyfIw64NSOD--cUg0AIcBqYRfk72LK-_M3FHGU6n51petwOGrhpdxIZ-Egd2ldUw3KHc_AvUBcaRvHlkHpzoAlxhSJCHCIStNCv-AXoYsAi1w8LwWPgKLfXQ7C9AJZwA3hn8PMK9Ac9CVcQdd98iCraI5I-0M8DQGZus6M_RXzIjTgIk5PRNMEh3Gn7MUit8fCkWWTsCA3f-cvZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-surface-container-high text-primary-container px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Principal Writer
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Gaspard Monge</span>
+<span class="font-body-sm text-body-sm text-slate-300">Informatics &amp; CS Lead</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">INFO.CG • Geometry</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Vetted Works</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">27 Folios</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">97.6%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Father of descriptive geometry and computational projection. Rigorously tests submitted code repositories, memory complexity, and graph reductions.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/monge</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- PANELIST 5: SOPHIE GERMAIN -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Portrait of Sophie Germain in an imperial 19th-century scientific laboratory surrounded by crystalline molecular models, chemical glassware, notebooks filled with prime number formulas, warm golden and amber lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIWtWhZAsrB_ZIVnEoTtfqXrvrcAXlvIErSEF2LPtq6LJsLzC1noVYOI-tjvtXR-kyzyvTbUHRyFWP87OCWvyO6z5BrSGoR61BlwTpd7EkTjjnjzpiN1dTph491LFsh2UKY0g8bbegadpevrn95Rof4ZlnMNgnEgNKERwg7CYcgor1IalIKrpuqFf6Lk_izDvTQrYVCJHq1EYDw93u6c5WJ-rZ1pAcciWW7e4B8DnDd3yod5R6LtX4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-secondary text-white px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Grand Inspector
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Sophie Germain</span>
+<span class="font-body-sm text-body-sm text-secondary-fixed">BioOlympiad &amp; Chemistry Inspector</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">Q-BIO.BM • Elastic Surfaces</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Audits Performed</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">54 Audits</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">99.0%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Validates experimental biochemical assays, elastodynamics, and number-theoretic cryptography submissions with unmatched statistical vigilance.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/germain</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- PANELIST 6: URBAIN LE VERRIER -->
+<article class="flex flex-col bg-surface-container-lowest rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+<div class="h-44 relative bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" data-alt="Portrait of Urbain Le Verrier surrounded by great astronomical brass telescopes, stellar cartography maps of Neptune, celestial orbital computations on heavy vellum parchment, deep night sky ambiance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8rOh5NDolvEsM0i0OYwMRnQMp0qqINayfKoZ5z8rinfQeFe-Zkb2r4opPP8kY9_y0O3JR6XzFcnwJwphAQFLCVqfBQIq5XbFS0ur5j5KGhH22lPwmqYqZ6K8St9tOIhI_ZKi7pvwtyh3JnFLoGKPNKbU9NIfYX9qu9jolncPKCWaQQRLgNoAt_FMU0rOxGVxxeUObWmA1D9aZMDUoC1p1_9SSgR689KN2Mfzs3-4kLe7o7I1l7j5e"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="absolute top-3 left-3 bg-tertiary-container/90 text-tertiary-fixed px-2.5 py-0.5 rounded text-label-badge font-mono uppercase tracking-wider">
+            Collegium Regent
+          </div>
+<div class="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-white font-serif">Urbain Le Verrier</span>
+<span class="font-body-sm text-body-sm text-tertiary-fixed-dim">Earth &amp; Astro Lead</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between text-body-sm">
+<span class="text-on-surface-variant font-medium">Domain Node</span>
+<span class="font-mono text-primary font-semibold">ASTRO.EP • Orbital Perturbation</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm p-space-sm rounded bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Vetted Works</span>
+<span class="font-title-lg text-title-lg text-primary-container font-mono">16 Folios</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">Accuracy Metric</span>
+<span class="font-title-lg text-title-lg text-secondary font-mono">98.0%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+              Discoverer of Neptune by mathematical deduction. Evaluates planetary mechanics, astronomical observational datasets, and orbital telemetry.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-mono text-label-code text-on-surface-variant">ARK: ark:/12148/leverrier</span>
+<a class="inline-flex items-center gap-1 font-title-md text-body-sm text-secondary hover:text-on-secondary-fixed-variant group-hover:translate-x-0.5 transition-transform text-decoration-none" href="panelist-detail.html">
+<span>Inspect Score Profile</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+</div>
+<!-- JURISPRUDENCE & RUBRIC REVIEWS SPARKLINES BENTO -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- EVALUATION FLOW PROGRESS CARD -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary-container">Auditing Cycle Integrity</span>
+<span class="material-symbols-outlined text-secondary text-sm">balance</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Three-tier consensus mandate before DOI registry locking.</p>
+</div>
+<!-- SVG Consensus Ring -->
+<div class="flex items-center justify-center py-2">
+<svg class="w-36 h-36" viewbox="0 0 100 100">
+<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="54.2" stroke-linecap="round" stroke-width="8"></circle>
+<text class="font-display font-bold text-[18px] fill-current text-primary-container" text-anchor="middle" x="50" y="47">78.4%</text>
+<text class="font-mono text-[8px] fill-current text-on-surface-variant" text-anchor="middle" x="50" y="60">CONCURRENCE</text>
+</svg>
+</div>
+<div class="flex items-center justify-between text-body-sm bg-surface-container-low p-2 rounded">
+<span class="text-on-surface-variant">Double-Blind Ratio</span>
+<span class="font-mono font-semibold text-primary">100.0% Compliant</span>
+</div>
+</div>
+<!-- SPEED & TURNAROUND SPARKLINE -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg shadow-sm flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary-container">Velocity of Verdicts (2026)</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">speed</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Average turnaround time per manuscript over the last 6 months.</p>
+</div>
+<!-- SVG Inline Chart -->
+<div class="py-2">
+<svg class="w-full h-24" viewbox="0 0 240 70">
+<defs>
+<lineargradient id="velocityGrad" x1="0" x2="0" y1="0" y2="1">
+<stop class="text-primary-container/20" offset="0%" stop-color="currentColor"></stop>
+<stop class="text-primary-container/0" offset="100%" stop-color="currentColor"></stop>
+</lineargradient>
+</defs>
+<path d="M 0 55 Q 40 45, 80 50 T 160 30 T 240 18 L 240 70 L 0 70 Z" fill="url(#velocityGrad)"></path>
+<path class="text-primary-container" d="M 0 55 Q 40 45, 80 50 T 160 30 T 240 18" fill="none" stroke="currentColor" stroke-width="2.5"></path>
+<circle class="fill-current text-secondary" cx="240" cy="18" r="4"></circle>
+</svg>
+</div>
+<div class="flex items-center justify-between text-body-sm bg-surface-container-low p-2 rounded">
+<span class="text-on-surface-variant">Current Target</span>
+<span class="font-mono font-semibold text-primary">&lt; 3.0 Days Maximum</span>
+</div>
+</div>
+<!-- ETHICAL DECREE / JURISPRUDENCE SEAL CARD -->
+<div class="bg-primary text-on-primary p-space-lg rounded-lg shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex flex-col gap-space-sm relative z-10">
+<div class="flex items-center gap-2 text-tertiary-fixed text-label-badge font-mono uppercase tracking-widest">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>Senate Mandate</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-white font-serif">Oath of Mathematical Honesty</h2>
+<p class="font-body-sm text-body-sm text-on-primary-container">
+            All panel judges operate under strict non-conflict seals. Folios containing unresolved lemmas are remanded for revision with constructive annotations.
+          </p>
+</div>
+<div class="pt-space-md relative z-10 flex items-center justify-between">
+<a class="inline-flex items-center gap-1 text-tertiary-fixed font-title-md text-body-sm hover:underline" href="about.html">
+<span>Read Archival Rubric</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+<span class="font-mono text-label-code text-on-primary-container">Rev. 2026.04</span>
+</div>
+</div>
+</div>
+<!-- CAMPUS LEADERBOARD: TOP SCHOLAR CONTRIBUTORS & TOP ADJUDICATORS -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<span class="font-label-badge text-label-badge uppercase tracking-widest text-secondary font-mono">Consortium Honors</span>
+<h2 class="font-headline-md text-headline-md text-primary-container font-serif">
+            Campus Leaderboard: Supreme Contributors &amp; Jurors
+          </h2>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Updated hourly from Inria-MC sync</span>
+</div>
+</div>
+<!-- LEADERBOARD TABLE -->
+<div class="bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary text-on-primary font-serif text-title-md uppercase tracking-wider text-xs">
+<th class="py-3 px-4 w-16">Rank</th>
+<th class="py-3 px-4">Academician &amp; Dossier</th>
+<th class="py-3 px-4">Affiliation / Lab</th>
+<th class="py-3 px-4 text-center">Congressional Status</th>
+<th class="py-3 px-4 text-right">Vetted / Deposited</th>
+<th class="py-3 px-4 text-right">Endowment Points</th>
+</tr>
+</thead>
+<tbody class="font-sans text-body-sm divide-y divide-surface-container">
+<!-- ROW 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-mono font-bold text-tertiary-container">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-display text-xs">
+                    01
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-display text-xs font-bold">
+                      AL
+                    </div>
+<div class="flex flex-col">
+<a class="font-title-md text-primary hover:text-secondary text-decoration-none" href="panelist-detail.html">
+                        Dr. Augustin-Louis Laplace
+                      </a>
+<span class="text-body-sm text-on-surface-variant font-mono">ark:/12148/laplace</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface">PSHS-MC Mathematics Syndicate</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 bg-tertiary-container text-tertiary-fixed px-2.5 py-0.5 rounded text-label-badge font-mono uppercase">
+                    ★ Vanguard Laureate
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-primary">42 Approved</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono font-bold text-secondary text-title-md">2,150 PTS</span>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-mono font-bold text-tertiary-container">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-primary-container flex items-center justify-center font-display text-xs">
+                    02
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-white flex items-center justify-center font-display text-xs font-bold">
+                      SG
+                    </div>
+<div class="flex flex-col">
+<a class="font-title-md text-primary hover:text-secondary text-decoration-none" href="panelist-detail.html">
+                        Sophie Germain
+                      </a>
+<span class="text-body-sm text-on-surface-variant font-mono">ark:/12148/germain</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface">Department of Organic Sciences</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 bg-secondary text-white px-2.5 py-0.5 rounded text-label-badge font-mono uppercase">
+                    Grand Inspector
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-primary">54 Approved</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono font-bold text-secondary text-title-md">1,890 PTS</span>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-mono font-bold text-tertiary-container">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-primary-container flex items-center justify-center font-display text-xs">
+                    03
+                  </div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-display text-xs font-bold">
+                      EC
+                    </div>
+<div class="flex flex-col">
+<a class="font-title-md text-primary hover:text-secondary text-decoration-none" href="panelist-detail.html">
+                        Émilie du Châtelet
+                      </a>
+<span class="text-body-sm text-on-surface-variant font-mono">ark:/12148/chatelet</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface">Inria AI / Deep Theory Unit</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded text-label-badge font-mono uppercase">
+                    Maestro
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-primary">38 Approved</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono font-bold text-secondary text-title-md">1,640 PTS</span>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-mono font-bold text-on-surface-variant">04</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-slate-700 text-white flex items-center justify-center font-display text-xs font-bold">
+                      HP
+                    </div>
+<div class="flex flex-col">
+<a class="font-title-md text-primary hover:text-secondary text-decoration-none" href="panelist-detail.html">
+                        Dr. Henri Poincaré
+                      </a>
+<span class="text-body-sm text-on-surface-variant font-mono">ark:/12148/poincare</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface">Theoretical Physics Section</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-primary-container px-2.5 py-0.5 rounded text-label-badge font-mono uppercase">
+                    Rector
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-primary">29 Approved</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono font-bold text-secondary text-title-md">1,420 PTS</span>
+</td>
+</tr>
+<!-- ROW 5 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-mono font-bold text-on-surface-variant">05</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-slate-600 text-white flex items-center justify-center font-display text-xs font-bold">
+                      GM
+                    </div>
+<div class="flex flex-col">
+<a class="font-title-md text-primary hover:text-secondary text-decoration-none" href="panelist-detail.html">
+                        Gaspard Monge
+                      </a>
+<span class="text-body-sm text-on-surface-variant font-mono">ark:/12148/monge</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-on-surface">Polytechnic Informatics Bureau</td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-primary-container px-2.5 py-0.5 rounded text-label-badge font-mono uppercase">
+                    Principal Writer
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-primary">27 Approved</td>
+<td class="py-3.5 px-4 text-right">
+<span class="font-mono font-bold text-secondary text-title-md">1,180 PTS</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- NOMINATION CALLOUT BANNER -->
+<div class="bg-surface-container-high p-space-lg rounded-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded bg-primary-container text-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl">how_to_reg</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-primary-container">Nominate a New Juror to the Curatorial Senate</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Requires minimum 3 published monographs and 200 validated citations within the Imperial Archive.</span>
+</div>
+</div>
+<a class="bg-primary text-white hover:bg-secondary px-space-md py-2 rounded text-body-sm font-title-md uppercase tracking-wider transition-colors whitespace-nowrap text-decoration-none" href="submit.html">
+        Petition Accreditation
+      </a>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- VANILLA INTERACTIVITY: Mobile/Desktop Sidebar Toggle & Active Route Detection -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('halSidebarToggle');
+      const sidebar = document.getElementById('halSidebar');
+      
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+
+      // Dynamic active state highlight based on current pathname
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const cleanCurrent = currentPath.replace('.html', '');
+      const navLinks = document.querySelectorAll('header nav a[data-path]');
+      const activeClasses = (document.querySelector('header nav')?.getAttribute('data-active-classes') || 'text-white border-tertiary-fixed-dim bg-white/15').split(' ');
+
+      navLinks.forEach(link => {
+        const linkPath = link.getAttribute('data-path');
+        if (linkPath === cleanCurrent || (cleanCurrent === '' && linkPath === 'index')) {
+          link.classList.add(...activeClasses);
+        }
+      });
+    });
+  </script>
+</body></html>
